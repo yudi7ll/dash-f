@@ -20,7 +20,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $data = $this->post->with('user')->paginate(10);
+        $posts = collect($data)->toArray();
+
+        return view('home', compact('posts'));
     }
 
     /**
