@@ -1,10 +1,4 @@
-@import url(https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@700&family=Roboto:wght@400;
-
-700&display=swap);@charset "UTF-8";
-.logo {
-  font-family: "IBM Plex Sans Condensed", sans-serif;
-  font-weight: bold;
-}
+@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
@@ -10932,9 +10926,5 @@ a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
-}
-
-body {
-  font-family: "Roboto", sans-serif;
 }
 
