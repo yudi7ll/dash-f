@@ -16,6 +16,11 @@ class Post extends Model
         'body',
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function setBodyAttribute($value)
     {
         $filename = md5(time()) . '.md';

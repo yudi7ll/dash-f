@@ -9,7 +9,9 @@
         @endif
         <ul>
             @foreach ($posts['data'] as $post)
-                <li>{{ $post['body'] }}</li>
+                <li>
+                    <a href="{{ route('post.show', $post['slug']) }}">{{ $post['title'] }}</a>
+                </li>
             @endforeach
         </ul>
     </div>
