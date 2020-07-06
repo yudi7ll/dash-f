@@ -49,12 +49,12 @@ class PostController extends Controller
         $data = new Post;
         $data->user_id = auth()->id();
         $data->title = $request->title;
-        $data->slug = Str::slug($request->title, '-') .'-'. substr(md5(time()), 0, 5);
+        $data->slug = $data->slugGenerator($request->title);
         $data->published = (boolean) $request->published;
         $data->description = $request->description;
         $data->cover = $request->cover;
         $data->body = $request->body;
-        $data->save();
+        $data->saveOrFail();
 
         return redirect('/')->with('status', 'Article saved successfully!');
     }
@@ -78,7 +78,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('post.edit', compact('post'));
     }
 
     /**
@@ -88,9 +88,20 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(StorePostRequest $request, Post $post)
     {
-        //
+        if ($request->title !== $post->title) {
+            $post->slug = $post->slugGenerator($request->title);
+        }
+
+        $post->title = $request->title;
+        $post->description = $request->description;
+        $post->published = (boolean) $request->published;
+        $post->cover = $request->cover;
+        $post->body = $request->body;
+        $post->saveOrFail();
+
+        return redirect('/')->with('status', 'Article updated successfully!');
     }
 
     /**

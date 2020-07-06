@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
@@ -39,5 +40,10 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public static function slugGenerator($title)
+    {
+        return Str::slug($title, '-') .'-'. substr(md5(time()), 0, 5);
     }
 }
