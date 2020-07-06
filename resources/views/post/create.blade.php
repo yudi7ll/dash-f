@@ -28,11 +28,15 @@
                 <label for="body">Article Body</label>
                 <textarea id="body" name="body" rows="20">{{ old('body') }}</textarea>
             </div>
+            <div class="form-group form-check">
+                <input type="checkbox" name="published" class="form-check-input" id="published">
+                <label class="form-check-label" for="published">Published</label>
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 
     <script charset="utf-8">
-        new SimpleMDE({ element: document.getElementById("body") });
+new SimpleMDE({ element: document.getElementById("body") });
     </script>
 @endsection

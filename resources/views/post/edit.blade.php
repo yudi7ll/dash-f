@@ -29,6 +29,10 @@
                 <label for="body">Article Body</label>
                 <textarea id="body" name="body" rows="20">{{ $post['body'] }}</textarea>
             </div>
+            <div class="form-group form-check">
+                <input type="checkbox" name="published" class="form-check-input" id="published" {{ ($post['published']) ? "checked" : "" }}>
+                <label class="form-check-label" for="published">Published</label>
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
             <button id="delete-btn" type="button" class="btn btn-danger" onclick="deletePost()">Delete Post</button>
         </form>

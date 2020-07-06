@@ -4,13 +4,14 @@
     <div class="container">
         <div class="d-flex justify-content-between">
             <h1>{{ $post['title'] }}</h1>
-            @if ($post['user_id'] === Auth::user()->id)
+            @can('update', $post)
                 <div>
                     <a class="btn btn-secondary" href="{{ route('post.edit', $post['slug']) }}">Edit</a>
                 </div>
-            @endif
+            @endcan
         </div>
         <h4>{{ $post['description'] }}</h4>
+        <small>{{ $post['created_at'] }}</small>
 
         <img class="w-100 d-block" src="{{ $post['cover'] }}" alt="{{ $post['title'] }}" />
 

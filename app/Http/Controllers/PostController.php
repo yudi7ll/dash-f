@@ -20,8 +20,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data = $this->post->with('user')->latest()->paginate(10);
-        $posts = collect($data)->toArray();
+        $posts = collect(
+            $this
+                ->post
+                ->with('user')
+                ->latest()
+                ->where('published', true)
+                ->paginate(10)
+        )->toArray();
 
         return view('home', compact('posts'));
     }
@@ -45,10 +51,10 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $data = new Post;
-        $data->user_id = auth()->id();
+        $data->user_id = $request->user_id;
         $data->title = $request->title;
-        $data->slug = $data->slugGenerator($request->title);
-        $data->published = (boolean) $request->published;
+        $data->slug = $request->slug;
+        $data->published = $request->published;
         $data->description = $request->description;
         $data->cover = $request->cover;
         $data->body = $request->body;
@@ -88,13 +94,10 @@ class PostController extends Controller
      */
     public function update(StorePostRequest $request, Post $post)
     {
-        if ($request->title !== $post->title) {
-            $post->slug = $post->slugGenerator($request->title);
-        }
-
         $post->title = $request->title;
+        $post->slug = $request->slug;
         $post->description = $request->description;
-        $post->published = (boolean) $request->published;
+        $post->published = $request->published;
         $post->cover = $request->cover;
         $post->body = $request->body;
         $post->saveOrFail();

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -22,9 +23,25 @@ class Post extends Model
         return 'slug';
     }
 
+    public function setUserIdAttribute()
+    {
+        $this->attributes['user_id'] = auth()->id();
+    }
+
+    public function setSlugAttribute()
+    {
+        $this->attributes['slug'] = Str::slug($this->attributes['title'], '-')
+            .'-' . substr(md5(time()), 0, 5);
+    }
+
+    public function setPublishedAttribute($value)
+    {
+        $this->attributes['published'] = $value === "on";
+    }
+
     public function setBodyAttribute($value)
     {
-        $filename = md5(time()) . '.md';
+        $filename = $this->attributes['slug'] . '.md';
         $fullPath = $this->path . $filename;
 
         Storage::put($fullPath, $value);
@@ -37,13 +54,18 @@ class Post extends Model
         return Storage::get($this->path . $value);
     }
 
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->diffForHumans();
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->diffForHumans();
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');
-    }
-
-    public static function slugGenerator($title)
-    {
-        return Str::slug($title, '-') .'-'. substr(md5(time()), 0, 5);
     }
 }
