@@ -11,7 +11,7 @@
             @endcan
         </div>
         <h4>{{ $post['description'] }}</h4>
-        <small>{{ $post['created_at'] }}</small>
+        <small>{{ $post['created_at']->diffForHumans() }}</small>
 
         <img class="w-100 d-block" src="{{ $post['cover'] }}" alt="{{ $post['title'] }}" />
 
