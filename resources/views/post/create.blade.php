@@ -14,19 +14,19 @@
             @csrf
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" name="title" id="title">
+                <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}">
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
-                <input type="text" class="form-control" name="description" id="description">
+                <input type="text" class="form-control" name="description" id="description" value="{{ old('description') }}">
             </div>
             <div class="form-group">
                 <label for="cover">Cover Image Url</label>
-                <input type="text" class="form-control" name="cover" id="cover" placeholder="https://image_url_example.com">
+                <input type="text" class="form-control" name="cover" id="cover" placeholder="https://image_url_example.com" value="{{ old('cover') }}">
             </div>
             <div>
                 <label for="body">Article Body</label>
-                <textarea id="body" name="body" rows="20"></textarea>
+                <textarea id="body" name="body" rows="20">{{ old('body') }}</textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
