@@ -30,10 +30,20 @@
                 <textarea id="body" name="body" rows="20">{{ $post['body'] }}</textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
+            <button id="delete-btn" type="button" class="btn btn-danger" onclick="deletePost()">Delete Post</button>
+        </form>
+
+        <form id="destroy-form" action="{{ route('post.destroy', $post['slug']) }}" method="POST">
+            @csrf
+            @method('DELETE')
         </form>
     </div>
 
     <script charset="utf-8">
         new SimpleMDE({ element: document.getElementById("body") });
+
+        function deletePost() {
+            confirm('Are you sure?') && document.getElementById('destroy-form').submit();
+        }
     </script>
 @endsection
