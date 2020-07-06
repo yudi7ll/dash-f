@@ -14,8 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
 Route::get('/', 'PostController@index')->name('home');
 
-Auth::routes();
+Route::resource('post', 'PostController')
+    ->middleware('auth:web')
+    ->except(['index']);
+
+// Route::get('/', 'PostController@index')->name('home');
+// Route::get('/post', 'PostController@create');
+//
+// Route::middleware('auth:web')->group(function () {
+//     Route::post('/post', 'PostController@store')
+// });
 
 // Route::get('/home', 'HomeController@index')->name('home');

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -33,7 +35,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.create');
     }
 
     /**
@@ -42,9 +44,19 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        //
+        $data = new Post;
+        $data->user_id = auth()->id();
+        $data->title = $request->title;
+        $data->slug = Str::slug($request->title, '-') .'-'. substr(md5(time()), 0, 5);
+        $data->published = (boolean) $request->published;
+        $data->description = $request->description;
+        $data->cover = $request->cover;
+        $data->body = $request->body;
+        $data->save();
+
+        return redirect('/')->with('status', 'Article saved successfully!');
     }
 
     /**
