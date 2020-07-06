@@ -22,7 +22,9 @@ Route::resource('post', 'PostController')
     ->middleware('auth:web')
     ->except(['index']);
 
-Route::redirect('/post', '/');
+Route::get('/post', function() {
+    redirect('/');
+});
 
 // Route::get('/', 'PostController@index')->name('home');
 // Route::get('/post', 'PostController@create');
