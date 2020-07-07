@@ -94,8 +94,12 @@ class PostController extends Controller
      */
     public function update(StorePostRequest $request, Post $post)
     {
+        // only update the slug if the title changed
+        if ($request->title !== $post->title) {
+            $post->slug = $request->slug;
+        }
+
         $post->title = $request->title;
-        $post->slug = $request->slug;
         $post->description = $request->description;
         $post->published = $request->published;
         $post->cover = $request->cover;
