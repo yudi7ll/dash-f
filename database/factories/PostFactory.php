@@ -3,14 +3,20 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Post;
+use App\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
 $factory->define(Post::class, function (Faker $faker) {
-    auth()->attempt([
-        'email' => 'admin@admin.com',
-        'password' => 'password'
-    ]);
+    // create user
+    $user = factory(User::class)->create()->only(['email']);
+    $user['password'] = 'password';
+
+    // try login
+    if (!auth()->check()) {
+        auth()->attempt($user);
+    }
+
     $title = $faker->realText(30);
 
     return [

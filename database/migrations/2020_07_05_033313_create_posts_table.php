@@ -23,6 +23,8 @@ class CreatePostsTable extends Migration
             $table->string('cover')->nullable();
             $table->string('body');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
