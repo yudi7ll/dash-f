@@ -19,6 +19,7 @@ Auth::routes();
 Route::get('/', 'PostController@index')->name('home');
 
 Route::resource('post', 'PostController');
+Route::resource('comment', 'CommentController');
 
 // Route::get('/', 'PostController@index')->name('home');
 // Route::get('/post', 'PostController@create');

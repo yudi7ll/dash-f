@@ -54,8 +54,16 @@ class Post extends Model
         return Storage::get($this->path . $value);
     }
 
+    /**
+     * @RELATIONS
+     */
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function comment()
+    {
+        return $this->hasMany('App\Comment');
     }
 }
