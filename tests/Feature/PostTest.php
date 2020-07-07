@@ -16,7 +16,9 @@ class PostTest extends TestCase
     {
         $response = $this->get('/');
 
-        $response->assertSuccessful();
+        $response
+            ->assertSuccessful()
+            ->assertViewIs('home');
     }
 
     public function test_user_should_be_able_to_visit_create_post_form()
