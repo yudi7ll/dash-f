@@ -5,15 +5,17 @@ namespace Tests\Unit;
 use App\Post;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class PostTest extends TestCase
 {
     use DatabaseMigrations;
 
-    public function test_homepage_should_show_latest_posts_first()
+    public function test_posts_should_belongsTo_user()
     {
-        $user = factory(User::class)->create();
-        factory(Post::class, 20)->create(['user_id' => $user->id]);
+        factory(Post::class)->create();
+        $post = Post::with('user')->first();
+
+        $this->assertArrayHasKey('user', $post);
     }
 }
