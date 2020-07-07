@@ -26,7 +26,7 @@
             </div>
             <div>
                 <label for="body">Article Body</label>
-                <textarea id="body" name="body" rows="20">{{ old('body') }}</textarea>
+                <textarea id="body" name="body" rows="20">{{ old('body') ?: '# Hello World' }}</textarea>
             </div>
             <div class="form-group form-check">
                 <input type="checkbox" name="published" class="form-check-input" id="published">

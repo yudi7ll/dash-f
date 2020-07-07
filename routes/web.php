@@ -18,9 +18,7 @@ Auth::routes();
 
 Route::get('/', 'PostController@index')->name('home');
 
-Route::resource('post', 'PostController')
-    ->middleware('auth:web')
-    ->except(['index']);
+Route::resource('post', 'PostController');
 
 // Route::get('/', 'PostController@index')->name('home');
 // Route::get('/post', 'PostController@create');

@@ -61,6 +61,6 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "fresh": "php artisan migrate:fresh --seed && composer dumpautoload && php artisan config:clear"
+        "fresh": "composer dumpautoload && php artisan config:clear && php artisan optimize && php artisan migrate:fresh --seed"
     }
 }
