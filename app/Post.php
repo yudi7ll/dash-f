@@ -10,6 +10,7 @@ class Post extends Model
 {
     private $path = 'public/posts/';
     protected $fillable = [
+        'user_id',
         'title',
         'published',
         'description',
