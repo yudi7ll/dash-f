@@ -22,15 +22,13 @@ $factory->define(Post::class, function (Faker $faker) {
         auth()->attempt($user);
     }
 
-    $title = $faker->realText(30);
-
     return [
-        'user_id' => auth()->id(),
-        'title' => $title,
-        'slug' => Str::slug($title, '-').'-'. substr(md5(time()), 0, 5),
+        'user_id' => '',
+        'title' => $faker->realText(30),
+        'slug' => '',
         'published' => 'on',
         'description' => $faker->realText(50),
-        'cover' => $faker->imageUrl(),
+        'cover' => $faker->imageUrl(800, 400),
         'body' => $faker->realText(1000),
     ];
 });
