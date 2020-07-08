@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class Post extends Model
 {
-    private $path = 'public/posts/';
+    protected $path = 'public/posts/';
     protected $fillable = [
         'user_id',
         'title',
