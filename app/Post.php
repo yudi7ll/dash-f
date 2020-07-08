@@ -31,7 +31,7 @@ class Post extends Model
     public function setSlugAttribute()
     {
         $this->attributes['slug'] = Str::slug($this->attributes['title'], '-')
-            .'-' . substr(md5(time()), 0, 5);
+            .'-' . Str::random(10);
     }
 
     public function setPublishedAttribute($value)
