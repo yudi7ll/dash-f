@@ -19,7 +19,11 @@ class LoginTest extends DuskTestCase
     public function test_should_be_able_to_login()
     {
         $this->browse(function (Browser $browser) {
-            $user = factory(User::class)->create();
+            if (!User::all()->count()) {
+                factory(User::class)->create();
+            }
+
+            $user = User::all()->first();
 
             $browser->visit('/login')
                     ->type('email', $user->email)

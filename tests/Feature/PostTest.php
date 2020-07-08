@@ -67,6 +67,6 @@ class PostTest extends TestCase
         $response = $this->get("/post/{$post->slug}");
 
         $response
-            ->assertStatus(404);
+            ->assertRedirect('/');
     }
 }
