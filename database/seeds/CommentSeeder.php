@@ -13,6 +13,6 @@ class CommentSeeder extends Seeder
      */
     public function run()
     {
-        factory(Comment::class, 10)->create([ 'post_id' => Post::first()->id ]);
+        factory(Comment::class, 10)->create();
     }
 }

@@ -8,9 +8,14 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
 $factory->define(Post::class, function (Faker $faker) {
-    // create user
-    $user = factory(User::class)->create()->only(['email']);
-    $user['password'] = 'password';
+    if (!User::all()->count()) {
+        factory(User::class)->create();
+    }
+
+    $user = [
+        'email' => User::all()->first()->email,
+        'password' => 'password'
+    ];
 
     // try login
     if (!auth()->check()) {

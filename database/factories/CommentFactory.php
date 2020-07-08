@@ -8,16 +8,24 @@ use App\User;
 use Faker\Generator as Faker;
 
 $factory->define(Comment::class, function (Faker $faker) {
-    $post = factory(Post::class)->create();
-    $user = factory(User::class)->create();
+    if (!Post::all()->count()) {
+        factory(Post::class)->create();
+    }
+
+    if (!User::all()->count()) {
+        factory(User::class)->create();
+    }
+
+    $user = User::all('email')->first()->email;
+    $posts = Post::all()->modelKeys();
 
     auth()->attempt([
-        'email' => $user->email,
+        'email' => $user,
         'password' => 'password',
     ]);
 
     return [
-        'post_id' => $post->id,
+        'post_id' => Post::findOrFail($faker->randomElement($posts)),
         'user_id' => auth()->id(),
         'content' => $faker->sentence,
     ];
