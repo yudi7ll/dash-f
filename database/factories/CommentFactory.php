@@ -19,6 +19,6 @@ $factory->define(Comment::class, function (Faker $faker) {
     return [
         'post_id' => $post->id,
         'user_id' => auth()->id(),
-        'content' => $faker->realText(20),
+        'content' => $faker->sentence,
     ];
 });

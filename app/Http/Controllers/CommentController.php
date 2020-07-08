@@ -3,28 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Http\Requests\CommentRequest;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function __construct()
     {
-        //
+        $this->middleware('auth:web');
+        $this->authorizeResource(Comment::class, 'comment');
     }
 
     /**
@@ -33,9 +21,15 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
-        //
+        $comment = new Comment;
+        $comment->post_id = $request->post_id;
+        $comment->user_id = $request->user_id;
+        $comment->content = $request->content;
+        $comment->saveOrFail();
+
+        return redirect()->back()->with('status', 'Comment posted successfully!');
     }
 
     /**
