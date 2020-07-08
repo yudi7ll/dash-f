@@ -88,7 +88,15 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $this->authorize('view', $post);
+        if (!$post->published) {
+
+            if (auth()->id() === $post->user_id) {
+                return view('post.show', compact('post'));
+            }
+
+            return redirect()->back()->with('status', 'You do not own this post');
+        }
+
         return view('post.show', compact('post'));
     }
 
