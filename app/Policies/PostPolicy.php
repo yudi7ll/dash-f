@@ -31,7 +31,9 @@ class PostPolicy
     public function view(User $user, Post $post)
     {
         if (!$post->published) {
-            return $user->id === $post->user_id;
+            return $user->id === $post->user_id
+                ? Response::allow()
+                : Response::deny('This post is not published');
         }
 
         return true;

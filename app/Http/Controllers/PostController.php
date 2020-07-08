@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
 use App\Http\Requests\StorePostRequest;
 use App\Post;
+use App\User;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -13,7 +14,6 @@ class PostController extends Controller
     public function __construct(Post $post)
     {
         $this->middleware('auth:web')->except(['index', 'show']);
-        $this->authorizeResource(Post::class, 'post');
 
         $this->post = $post;
     }
@@ -32,6 +32,19 @@ class PostController extends Controller
                 ->where('published', true)
                 ->paginate(10)
         )->toArray();
+
+        return view('home', compact('posts'));
+    }
+
+    /**
+     * Display a listing of the owned posts
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function userPost(User $user)
+    {
+        $posts = collect($user->post()->paginate(10));
+        // dd($user->can('view', ));
 
         return view('home', compact('posts'));
     }
@@ -75,6 +88,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $this->authorize('view', $post);
         return view('post.show', compact('post'));
     }
 
@@ -86,6 +100,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
         return view('post.edit', compact('post'));
     }
 
@@ -98,6 +113,7 @@ class PostController extends Controller
      */
     public function update(StorePostRequest $request, Post $post)
     {
+        $this->authorize('update', $post);
         // only update the slug if the title changed
         if ($request->title !== $post->title) {
             $post->slug = $request->slug;
@@ -121,6 +137,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        Storage::delete($post->path . $post->body);
         $post->delete();
         return redirect('/')->with('status', 'Article deleted successfully!');
     }
