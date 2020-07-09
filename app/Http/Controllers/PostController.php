@@ -25,15 +25,20 @@ class PostController extends Controller
     public function index()
     {
         $posts = collect(
-            $this
-                ->post
-                ->with('user')
-                ->latest()
-                ->where('published', true)
-                ->paginate(20)
-        )->toArray();
+            $this->post
+                 ->with('user')
+                 ->latest()
+                 ->where('published', true)
+                 ->paginate(20)
+        );
 
-        return view('home', compact('posts'));
+        $populars = $this->post->all()->take(10);
+
+        debug($posts, $populars);
+
+        return view('home')
+            ->with('posts', $posts)
+            ->with('populars', $populars);
     }
 
     /**

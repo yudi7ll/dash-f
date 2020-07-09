@@ -17,9 +17,15 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'PostController@index')->name('home');
-Route::get('/{user:id}/post', 'PostController@userPost')->name('user_post');
 
+// users
+Route::get('profile/{user}')->name('profile');
+
+// posts
+Route::get('/{user:id}/post', 'PostController@userPost')->name('user_post');
 Route::resource('post', 'PostController');
+
+// comments
 Route::resource('comment', 'CommentController');
 
 // Route::get('/', 'PostController@index')->name('home');

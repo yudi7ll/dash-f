@@ -5,7 +5,6 @@ namespace Tests\Browser;
 use App\Post;
 use App\User;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Auth;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
