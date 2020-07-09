@@ -30,7 +30,7 @@ class PostController extends Controller
                 ->with('user')
                 ->latest()
                 ->where('published', true)
-                ->paginate(10)
+                ->paginate(20)
         )->toArray();
 
         return view('home', compact('posts'));

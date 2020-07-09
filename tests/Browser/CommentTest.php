@@ -42,7 +42,7 @@ class CommentTest extends DuskTestCase
                     ->type('content', $newComment)
                     ->press('Send')
                     ->assertDontSee($newComment)
-                    ->assertRouteIs('/login')
+                    ->assertRouteIs('login')
                     ->assertSee('Login');
         });
     }

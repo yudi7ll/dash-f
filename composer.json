@@ -61,7 +61,8 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "public-storage-clear": "rm storage/app/public/posts/*",
-        "fresh": "composer dumpautoload && php artisan config:clear && php artisan optimize:clear && composer public-storage-clear && php artisan migrate:fresh --seed"
+        "public-storage-clear": "rm -rf storage/app/public/posts/*",
+        "fresh": "composer dumpautoload && php artisan config:clear && php artisan optimize:clear && composer public-storage-clear && php artisan migrate:fresh --seed",
+        "full-test": "php artisan test && php artisan dusk"
     }
 }

@@ -30,7 +30,7 @@
                 <button type="submit" class="btn btn-primary d-block ml-auto">Send</button>
             </form>
             <div class="mt-3">
-                <ul class="list-group">
+                <ul id="comment-list" class="list-group">
                     @foreach ($post['comment']->reverse() as $comment)
                         <li class="list-group-item d-flex justify-content-between">
                             <span>

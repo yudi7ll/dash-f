@@ -5,7 +5,6 @@
 use App\Post;
 use App\User;
 use Faker\Generator as Faker;
-use Illuminate\Support\Str;
 
 $factory->define(Post::class, function (Faker $faker) {
     if (!User::all()->count()) {
