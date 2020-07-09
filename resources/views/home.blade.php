@@ -9,63 +9,79 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                <div>
-                    @foreach ($posts['data'] as $key => $post)
-                        <div class="card mb-3 border-0">
-                            @if ($key === 0)
-                                <a href="{{ route('post.show', $post['slug']) }}">
-                                    <img src="{{ $post['cover'] }}" class="card-img-top" alt="{{ $post['slug'] }}">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        <h4>
-                                            <a class="text-dark" href="{{ route('post.show', $post['slug']) }}">{{ $post['title'] }}</a>
-                                        </h4>
-                                    </h5>
-                                    <p class="card-text">{{ $post['description'] }}</p>
-                                    <p class="card-text">
-                                    <small>
-                                        <a class="text-dark" href="{{ route('profile', $post['user']['id']) }}">{{ $post['user']['name'] }}</a>
-                                    </small>
-                                    <span> . </span>
-                                    <small class="text-muted">{{ \Carbon\Carbon::parse($post['updated_at'])->diffForHumans() }}</small>
-                                    </p>
-                                </div>
-                            @else
-                                <div class="row no-gutters">
-                                    <div class="col-md-4 my-auto">
-                                        <a href="{{ route('post.show', $post['slug']) }}">
-                                            <img src="{{ $post['cover'] }}" class="card-img img-fluid" alt="{{ $post['slug'] }}">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">
-                                                <a class="text-dark" href="{{ route('post.show', $post['slug']) }}">{{ $post['title'] }}</a>
-                                            </h5>
-                                            <p class="card-text text-truncate">{{ $post['description'] }}</p>
-                                            <p class="card-text">
-                                            <small>
-                                                <a class="text-dark" href="{{ route('profile', $post['user']['id']) }}">{{ $post['user']['name'] }}</a>
-                                            </small>
-                                            <span> . </span>
-                                            <small class="text-muted">{{ \Carbon\Carbon::parse($post['updated_at'])->diffForHumans() }}</small>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                        </div>
-                    @endforeach
+                <div class="card mb-3 border-0">
+                    <a href="{{ route('post.show', $posts['data'][0]['slug']) }}">
+                        <img src="{{ $posts['data'][0]['cover'] }}" class="card-img-top" alt="{{ $posts['data'][0]['slug'] }}">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <h4>
+                                <a class="text-dark" href="{{ route('post.show', $posts['data'][0]['slug']) }}">{{ $posts['data'][0]['title'] }}</a>
+                            </h4>
+                        </h5>
+                        <p class="card-text">{{ $posts['data'][0]['description'] }}</p>
+                        <p class="card-text">
+                        <small>
+                            <a class="text-dark" href="{{ route('profile', $posts['data'][0]['user']['id']) }}">{{ $posts['data'][0]['user']['name'] }}</a>
+                        </small>
+                        <span> . </span>
+                        <small class="text-muted">{{ \Carbon\Carbon::parse($posts['data'][0]['updated_at'])->diffForHumans() }}</small>
+                        </p>
+                    </div>
                 </div>
-                <a href="{{ $posts['first_page_url'] }}">First</a>
-                <a href="{{ $posts['prev_page_url'] }}">Prev</a>
-                <a href="{{ $posts['next_page_url'] }}">Next</a>
-                <a href="{{ $posts['last_page_url'] }}">Last</a>
+                <div id="postcard">
+                    @include('components.postcard')
+                </div>
+                <center id="loading" class="my-4">
+                    <div class="spinner-grow spinner-grow-sm text-success" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow spinner-grow-sm text-warning" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </center>
             </div>
             <div class="col-md-4">
                 @include('components.sidebar')
             </div>
         </div>
     </div>
+    <script>
+window.addEventListener('load', function() {
+    const SITEURL = "{{ $posts['next_page_url'] }}";
+    const loading = $('#loading');
+
+    loading.hide();
+
+    $(window).scroll(function() { //detect page scroll
+        if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+            load_more(); //load content
+        }
+    });
+
+    function load_more(){
+        loading.show();
+
+        const config = {
+            headers: {
+                'Content-Type': 'text/html',
+                'Datatype': 'html',
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        }
+
+        fetch(SITEURL, config)
+            .then(res => res.text())
+            .then(res => {
+                console.log(res);
+                $('#postcard').append(res)
+            })
+            .catch(err => console.error(err))
+            .finally(() => loading.hide());
+    }
+});
+    </script>
 @endsection

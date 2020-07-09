@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Post;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -22,15 +23,19 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $posts = collect(
             $this->post
                  ->with('user')
                  ->latest()
                  ->where('published', true)
-                 ->paginate(20)
+                 ->paginate(10)
         );
+
+        if ($request->isXmlHttpRequest()) {
+            return view('components.postcard')->with('posts', $posts);
+        }
 
         $populars = $this->post->all()->take(10);
 
