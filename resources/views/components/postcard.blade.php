@@ -8,9 +8,9 @@
         <div class="col-md-8">
             <div class="card-body">
                 <h5 class="card-title">
-                    <a class="text-dark" href="{{ route('post.show', $post['slug']) }}">{{ $post['title'] }}</a>
+                    <a class="text-dark" href="{{ route('post.show', $post['slug']) }}" title="{{ $post['title'] }}">{{ $post['title'] }}</a>
                 </h5>
-                <p class="card-text text-truncate">{{ $post['description'] }}</p>
+                <p class="card-text text-truncate" title="{{ $post['description'] }}">{{ $post['description'] }}</p>
                 <p class="card-text">
                 <small>
                     <a class="text-dark" href="{{ route('profile', $post['user']['id']) }}">{{ $post['user']['name'] }}</a>

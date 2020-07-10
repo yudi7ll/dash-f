@@ -25,11 +25,20 @@ class PostTest extends DuskTestCase
                     ->type('title', $post->title)
                     ->type('description', $post->description)
                     ->type('cover', $post->cover)
-                    ->check('published')
+                    ->check('#published')
                     ->press('Submit')
                     ->waitForRoute('home')
                     ->assertRouteIs('home')
                     ->assertSee($post->title);
+        });
+    }
+
+    public function test_infinite_scrolling()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/')
+                    ->scrollTo('#loading')
+                    ->assertDontSee('No more data.');
         });
     }
 }

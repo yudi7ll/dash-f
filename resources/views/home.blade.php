@@ -12,15 +12,15 @@
                 @endif
                 <div class="card mb-3 border-0">
                     <a href="{{ route('post.show', $posts['data'][0]['slug']) }}">
-                        <img src="{{ $posts['data'][0]['cover'] }}" class="card-img-top" alt="{{ $posts['data'][0]['slug'] }}">
+                        <img src="{{ $posts['data'][0]['cover'] }}" class="card-img-top img-fluid" alt="{{ $posts['data'][0]['title'] }}">
                     </a>
                     <div class="card-body">
                         <h5 class="card-title">
-                            <h4>
+                            <h4 title="{{ $posts['data'][0]['title'] }}">
                                 <a class="text-dark" href="{{ route('post.show', $posts['data'][0]['slug']) }}">{{ $posts['data'][0]['title'] }}</a>
                             </h4>
                         </h5>
-                        <p class="card-text">{{ $posts['data'][0]['description'] }}</p>
+                        <p class="card-text" title="{{ $posts['data'][0]['description'] }}">{{ $posts['data'][0]['description'] }}</p>
                         <p class="card-text">
                         <small>
                             <a class="text-dark" href="{{ route('profile', $posts['data'][0]['user']['id']) }}">{{ $posts['data'][0]['user']['name'] }}</a>

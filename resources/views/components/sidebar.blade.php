@@ -6,7 +6,7 @@
     <div class="p-3">
         @foreach ($populars as $popular)
             <div class="p-3">
-                <a class="text-dark text-truncate" href="{{ route('post.show', $popular['slug']) }}">
+                <a class="text-dark text-truncate" href="{{ route('post.show', $popular['slug']) }}" title="{{ $popular['title'] }}">
                     {{ $popular['title'] }}
                 </a>
                 <div>

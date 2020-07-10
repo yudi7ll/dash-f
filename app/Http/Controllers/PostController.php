@@ -104,7 +104,7 @@ class PostController extends Controller
                 return view('post.show', compact('post'));
             }
 
-            return redirect()->back()->with('status', 'You do not own this post');
+            return redirect()->back()->with('status', 'You don\'t have permissions to do this action');
         }
 
         return view('post.show')->with('post', $post);

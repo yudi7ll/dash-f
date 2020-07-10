@@ -37,6 +37,6 @@
     </div>
 
     <script charset="utf-8">
-new SimpleMDE({ element: document.getElementById("body") });
+        new SimpleMDE({ element: document.getElementById("body") });
     </script>
 @endsection
