@@ -10923,12 +10923,12 @@ a.text-dark:focus {
   }
 }
 
+body {
+  font-family: "Roboto", sans-serif;
+}
+
 .logo {
   font-family: "IBM Plex Sans Condensed", sans-serif;
   font-weight: bold;
-}
-
-body {
-  font-family: "Roboto", sans-serif;
 }
 

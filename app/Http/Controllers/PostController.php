@@ -30,7 +30,7 @@ class PostController extends Controller
                  ->with('user')
                  ->latest()
                  ->where('published', true)
-                 ->paginate(10)
+                 ->paginate(8)
         );
 
         if ($request->isXmlHttpRequest()) {
@@ -107,7 +107,7 @@ class PostController extends Controller
             return redirect()->back()->with('status', 'You do not own this post');
         }
 
-        return view('post.show', compact('post'));
+        return view('post.show')->with('post', $post);
     }
 
     /**

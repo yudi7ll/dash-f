@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -32,7 +33,7 @@
                 <div id="postcard">
                     @include('components.postcard')
                 </div>
-                <center id="loading" class="my-4">
+                <center id="loading" class="my-4" style="display: none;">
                     <div class="spinner-grow spinner-grow-sm text-success" role="status">
                         <span class="sr-only">Loading...</span>
                     </div>
@@ -43,45 +44,58 @@
                         <span class="sr-only">Loading...</span>
                     </div>
                 </center>
+                <center id="no-data" class="my-4" style="display: none;">
+                    <span>No more data.</span>
+                </center>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 d-none d-md-block">
                 @include('components.sidebar')
             </div>
         </div>
     </div>
-    <script>
-window.addEventListener('load', function() {
-    const SITEURL = "{{ $posts['next_page_url'] }}";
-    const loading = $('#loading');
+    <script charset="utf-8">
+        let page = 2;
+        let isLoading = false;
+        const SITEURL = "{{ url('/') }}" + "?page=";
+        const loading = $('#loading');
+        const noData = $('#no-data');
 
-    loading.hide();
+        $(window).scroll(() => {
+            if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                load_more();
+            }
+        });
 
-    $(window).scroll(function() { //detect page scroll
-        if($(window).scrollTop() + $(window).height() >= $(document).height()) {
-            load_more(); //load content
-        }
-    });
+        function load_more() {
+            loading.show();
+            noData.hide();
 
-    function load_more(){
-        loading.show();
+            const config = {
+                headers: {
+                    'Content-Type': 'text/html',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            }
 
-        const config = {
-            headers: {
-                'Content-Type': 'text/html',
-                'Datatype': 'html',
-                'X-Requested-With': 'XMLHttpRequest'
+            if (!isLoading) {
+                isLoading = true;
+
+                fetch(SITEURL + page, config)
+                    .then(res => res.text())
+                    .then(res => {
+                        if (!res) {
+                            return noData.show();
+                        }
+
+                        $('#postcard').append(res);
+                        page++;
+                    })
+                    .catch(noData.show)
+                    .finally(() => {
+                        loading.hide();
+                        isLoading = false;
+                    });
             }
         }
-
-        fetch(SITEURL, config)
-            .then(res => res.text())
-            .then(res => {
-                console.log(res);
-                $('#postcard').append(res)
-            })
-            .catch(err => console.error(err))
-            .finally(() => loading.hide());
-    }
-});
     </script>
 @endsection
