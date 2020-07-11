@@ -32,14 +32,11 @@ class PostController extends Controller
                  ->where('published', true)
                  ->paginate(8)
         );
+        $populars = $this->post->all()->take(10);
 
         if ($request->isXmlHttpRequest()) {
             return view('components.postcard')->with('posts', $posts);
         }
-
-        $populars = $this->post->all()->take(10);
-
-        debug($posts, $populars);
 
         return view('home')
             ->with('posts', $posts)
@@ -54,7 +51,6 @@ class PostController extends Controller
     public function userPost(User $user)
     {
         $posts = collect($user->post()->paginate(10));
-        // dd($user->can('view', ));
 
         return view('home', compact('posts'));
     }
@@ -87,7 +83,9 @@ class PostController extends Controller
         $data->body = $request->body;
         $data->saveOrFail();
 
-        return redirect('/')->with('status', 'Article saved successfully!');
+        return redirect()
+            ->route('post.show', $data->slug)
+            ->with('status', 'Article saved successfully!');
     }
 
     /**
@@ -144,7 +142,9 @@ class PostController extends Controller
         $post->body = $request->body;
         $post->saveOrFail();
 
-        return redirect('/')->with('status', 'Article updated successfully!');
+        return redirect()
+            ->route('post.show', $post->slug)
+            ->with('status', 'Article updated successfully!');
     }
 
     /**

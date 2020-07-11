@@ -25,7 +25,7 @@ class PostTest extends DuskTestCase
                     ->type('title', $post->title)
                     ->type('description', $post->description)
                     ->type('cover', $post->cover)
-                    ->check('#published')
+                    ->check('Published')
                     ->press('Submit')
                     ->waitForRoute('home')
                     ->assertRouteIs('home')

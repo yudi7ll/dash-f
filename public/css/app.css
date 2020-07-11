@@ -7063,7 +7063,8 @@ button.bg-dark:focus {
   background-color: #1d2124 !important;
 }
 
-.bg-white {
+.bg-white,
+section {
   background-color: #fff !important;
 }
 
@@ -7071,7 +7072,8 @@ button.bg-dark:focus {
   background-color: transparent !important;
 }
 
-.border {
+.border,
+section {
   border: 1px solid #dee2e6 !important;
 }
 
@@ -7151,7 +7153,8 @@ button.bg-dark:focus {
   border-radius: 0.2rem !important;
 }
 
-.rounded {
+.rounded,
+section {
   border-radius: 0.25rem !important;
 }
 
@@ -8615,7 +8618,8 @@ button.bg-dark:focus {
   padding-left: 0.5rem !important;
 }
 
-.p-3 {
+.p-3,
+section {
   padding: 1rem !important;
 }
 

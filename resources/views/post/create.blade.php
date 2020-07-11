@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
-    <div class="container">
+    <div class="container py-4">
         @foreach ($errors->all() as $error)
             <div class="alert alert-danger" role="alert">
                 {{ $error }}

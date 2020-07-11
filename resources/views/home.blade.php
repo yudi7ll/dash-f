@@ -2,7 +2,7 @@
 
 @section('content')
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
-    <div class="container">
+    <div class="container-md pt-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 @if (session('status'))
@@ -10,10 +10,12 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                <div class="card mb-3 border-0">
-                    <a href="{{ route('post.show', $posts['data'][0]['slug']) }}">
-                        <img src="{{ $posts['data'][0]['cover'] }}" class="card-img-top img-fluid" alt="{{ $posts['data'][0]['title'] }}">
-                    </a>
+                <div class="card mb-2">
+                    @if ($posts['data'][0]['cover'])
+                        <a href="{{ route('post.show', $posts['data'][0]['slug']) }}">
+                            <img src="{{ $posts['data'][0]['cover'] }}" class="card-img-top img-fluid" alt="{{ $posts['data'][0]['title'] }}">
+                        </a>
+                    @endif
                     <div class="card-body">
                         <h5 class="card-title">
                             <h4 title="{{ $posts['data'][0]['title'] }}">

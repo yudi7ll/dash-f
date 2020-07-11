@@ -15,3 +15,10 @@ body {
     font-family: $font-logo;
     font-weight: bold;
 }
+
+section {
+    @extend .bg-white;
+    @extend .rounded;
+    @extend .border;
+    @extend .p-3;
+}
