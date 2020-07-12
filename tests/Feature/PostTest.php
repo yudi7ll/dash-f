@@ -12,15 +12,6 @@ class PostTest extends TestCase
 {
     use DatabaseMigrations;
 
-    public function test_guest_can_see_posts()
-    {
-        $response = $this->get('/');
-
-        $response
-            ->assertSuccessful()
-            ->assertViewIs('home');
-    }
-
     public function test_user_should_be_able_to_visit_create_post_form()
     {
         $user = factory(User::class)->create();

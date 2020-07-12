@@ -23,6 +23,7 @@ class RegisterTest extends DuskTestCase
 
             $browser->visit('/register')
                     ->type('name', $user->name)
+                    ->type('username', $user->username)
                     ->type('email', $user->email)
                     ->type('password', 'password')
                     ->type('password_confirmation', 'password')

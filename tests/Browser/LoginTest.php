@@ -26,7 +26,7 @@ class LoginTest extends DuskTestCase
             $user = User::all()->first();
 
             $browser->visit('/login')
-                    ->type('email', $user->email)
+                    ->type('identity', $user->email)
                     ->type('password', 'password')
                     ->press('Login')
                     ->assertRouteIs('home')
