@@ -17,6 +17,22 @@
     </head>
     <body>
         <div id="app">
+            <header class="py-2 border-bottom shadow-sm">
+                <div class="container">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col">
+                            <a class="logo navbar-brand" href="{{ route('home') }}">{{ __('DashF') }}</a>
+                        </div>
+                        <div class="col d-flex justify-content-end align-items-center">
+                            @guest
+                                <a class="text-dark" href="{{ route('login') }}">{{ __('Sign In') }}</a>
+                                <a class="text-dark ml-2 btn btn-outline-secondary" href="{{ route('register') }}">{{ __('Sign Up') }}</a>
+                            @endguest
+                        </div>
+                    </div>
+                </div>
+            </header>
+            {{--
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
                 <div class="container">
                     <a class="navbar-brand logo" href="{{ url('/') }}">
@@ -39,11 +55,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
                             @else
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -68,6 +82,7 @@
                     </div>
                 </div>
             </nav>
+            --}}
 
             <main class="bg-light">
                 @yield('content')

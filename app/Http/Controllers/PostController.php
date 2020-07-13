@@ -39,7 +39,6 @@ class PostController extends Controller
         }
 
         return view('home')
-            ->with('posts', $posts)
             ->with('populars', $populars);
     }
 

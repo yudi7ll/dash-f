@@ -10776,12 +10776,15 @@ a.text-light:focus {
   color: #cbd3da !important;
 }
 
-.text-dark {
+.text-dark,
+.logo {
   color: #343a40 !important;
 }
 
 a.text-dark:hover,
-a.text-dark:focus {
+a.logo:hover,
+a.text-dark:focus,
+a.logo:focus {
   color: #121416 !important;
 }
 
@@ -10934,5 +10937,12 @@ body {
 .logo {
   font-family: "IBM Plex Sans Condensed", sans-serif;
   font-weight: bold;
+}
+
+@media (max-width: 767.98px) {
+  article {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 }
 

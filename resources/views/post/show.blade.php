@@ -10,9 +10,9 @@
         }
     </style>
 
-    <div class="container-md">
+    <div class="container-sm">
         <div class="row">
-            <div class="col-md-8 p-3">
+            <article class="col col-md-8 py-3">
                 <section>
                     @if (!$post['published'])
                         <div class="alert alert-danger" role="alert">
@@ -38,10 +38,9 @@
 
                     <div class="my-3">
                         {!! (new Markdown)->convertToHtml($post['body']) !!}
-                        <hr>
                     </div>
                 </section>
-                <section class="comments mt-3">
+                <section class="comments mt-2">
                     <h5>Comments</h5>
                     <form method="post" action="{{ route('comment.store') }}">
                         @csrf
@@ -69,7 +68,7 @@
                         </ul>
                     </div>
                 </section>
-            </div>
+            </article>
         </div>
     </div>
     <script>hljs.initHighlightingOnLoad();</script>

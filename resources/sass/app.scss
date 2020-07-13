@@ -12,6 +12,7 @@ body {
 }
 
 .logo {
+    @extend .text-dark;
     font-family: $font-logo;
     font-weight: bold;
 }
@@ -21,4 +22,11 @@ section {
     @extend .rounded;
     @extend .border;
     @extend .p-3;
+}
+
+@include media-breakpoint-down(sm) {
+    article {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
 }

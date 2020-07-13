@@ -23,11 +23,11 @@ $factory->define(Post::class, function (Faker $faker) {
 
     return [
         'user_id' => '',
-        'title' => $faker->realText(30),
+        'title' => $faker->realText(50),
         'slug' => '',
         'published' => 'on',
-        'description' => $faker->realText(50),
-        'cover' => $faker->imageUrl(800, 400),
+        'description' => $faker->realText(80),
+        'cover' => $faker->imageUrl(640, 320),
         'body' => $faker->realText(1000),
     ];
 });
