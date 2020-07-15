@@ -13,15 +13,20 @@
                 <div id="postcard">
                     @include('components.postcard')
                 </div>
-                <center id="loading" class="my-4" style="display: none;">
-                    <div class="spinner-grow spinner-grow-sm text-success" role="status">
-                        <span class="sr-only">Loading...</span>
+                <center class="my-4">
+                    <div id="loading" style="display: none;">
+                        <div class="spinner-grow spinner-grow-sm text-success" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="spinner-grow spinner-grow-sm text-warning" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
                     </div>
-                    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                    <div class="spinner-grow spinner-grow-sm text-warning" role="status">
-                        <span class="sr-only">Loading...</span>
+                    <div class="my-4" id="no-data" style="display: none;">
+                        No more data.
                     </div>
                 </center>
             </div>
@@ -47,8 +52,8 @@
             });
 
             function load_more() {
-                loading.show();
                 noData.hide();
+                loading.show();
 
                 const config = {
                     headers: {
@@ -63,6 +68,11 @@
                     fetch(SITEURL + page, config)
                         .then(res => res.text())
                         .then(res => {
+                            if (!res) {
+                                noData.show();
+                                return;
+                            }
+
                             $('#postcard').append(res);
                             page++;
                         })

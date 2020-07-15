@@ -28,8 +28,7 @@ class RegisterTest extends DuskTestCase
                     ->type('password', 'password')
                     ->type('password_confirmation', 'password')
                     ->press('Register')
-                    ->assertRouteIs('home')
-                    ->assertSee($user->name);
+                    ->assertRouteIs('home');
         });
     }
 }

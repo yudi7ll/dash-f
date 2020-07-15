@@ -23,7 +23,12 @@
                 </p>
             </div>
         @else
-            <div class="row no-gutters">
+            <div class="row no-gutters flex-md-row-reverse">
+                <div class="col-md-4 my-auto">
+                    <a href="{{ route('post.show', $post['slug']) }}">
+                        <img src="{{ $post['cover'] }}" class="card-img img-fluid pr-md-3" alt="{{ $post['slug'] }}">
+                    </a>
+                </div>
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">
@@ -38,11 +43,6 @@
                         <small class="text-muted">{{ \Carbon\Carbon::parse($post['updated_at'])->diffForHumans() }}</small>
                         </p>
                     </div>
-                </div>
-                <div class="col-md-4 my-auto">
-                    <a href="{{ route('post.show', $post['slug']) }}">
-                        <img src="{{ $post['cover'] }}" class="card-img img-fluid" alt="{{ $post['slug'] }}">
-                    </a>
                 </div>
             </div>
         @endif

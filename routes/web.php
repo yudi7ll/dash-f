@@ -20,9 +20,10 @@ Route::get('/', 'PostController@index')->name('home');
 
 // users
 Route::get('/{user}')->name('profile');
+Route::get('/profile/me', 'UserController@authProfile')->name('profile.me');
 
 // posts
-Route::get('/{user:id}/post', 'PostController@userPost')->name('user_post');
+Route::get('/{user:id}/post', 'PostController@userPost')->name('user.post');
 Route::resource('post', 'PostController');
 
 // comments

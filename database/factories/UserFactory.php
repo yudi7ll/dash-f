@@ -21,6 +21,7 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'username' => $faker->userName,
+        'cover' => $faker->image(public_path('/images/cover')),
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => bcrypt('password'),
