@@ -13990,3 +13990,29 @@ body {
   }
 }
 
+.bg-cover {
+  background-size: cover;
+}
+
+.bg-center {
+  background-position: center;
+}
+
+.bg-norepeat {
+  background-repeat: no-repeat;
+}
+
+.post-cover {
+  padding-top: 75%;
+}
+
+@media (max-width: 767.98px) {
+  .post-cover {
+    padding-top: 50%;
+  }
+}
+
+.post-cover-large {
+  padding-top: 50%;
+}
+

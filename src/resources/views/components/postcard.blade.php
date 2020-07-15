@@ -3,9 +3,7 @@
     <div class="card mb-1">
         @if ($posts['current_page'] === 1 && $key === 0)
             @if ($post['cover'])
-                <a href="{{ route('post.show', $post['slug']) }}">
-                    <img src="{{ $post['cover'] }}" class="card-img-top img-fluid" alt="{{ $post['title'] }}">
-                </a>
+                <a href="{{ route('post.show', $post['slug']) }}" class="post-cover-large d-block bg-cover bg-center bg-norepeat" style="background-image: url('{{ $post['cover'] }}');"></a>
             @endif
             <div class="card-body">
                 <h5 class="card-title">
@@ -24,10 +22,12 @@
             </div>
         @else
             <div class="row no-gutters flex-md-row-reverse">
-                <div class="col-md-4 my-auto">
-                    <a href="{{ route('post.show', $post['slug']) }}">
-                        <img src="{{ $post['cover'] }}" class="card-img img-fluid pr-md-3" alt="{{ $post['slug'] }}">
-                    </a>
+                <div class="col-md-4 p-0 p-md-3 rounded">
+                    <a
+                        href="{{ route('post.show', $post['slug']) }}"
+                        class="post-cover d-block bg-cover bg-center bg-norepeat"
+                        style="background-image: url('{{ $post['cover'] }}');"
+                    ></a>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
