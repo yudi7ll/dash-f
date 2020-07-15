@@ -21,13 +21,15 @@ $factory->define(Post::class, function (Faker $faker) {
         auth()->attempt($user);
     }
 
+    $url = 'https://picsum.photos/id/';
+
     return [
         'user_id' => '',
         'title' => $faker->realText(50),
         'slug' => '',
         'published' => 'on',
         'description' => $faker->realText(80),
-        'cover' => $faker->imageUrl(640, 320),
+        'cover' => $url . $faker->randomNumber(3) . '/640/320',
         'body' => $faker->realText(1000),
     ];
 });
