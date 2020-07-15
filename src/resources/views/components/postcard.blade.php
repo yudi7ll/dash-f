@@ -22,7 +22,7 @@
             </div>
         @else
             <div class="row no-gutters flex-md-row-reverse">
-                <div class="col-md-4 p-0 p-md-3 rounded">
+                <div class="col-md-4 p-0 p-md-3">
                     <a
                         href="{{ route('post.show', $post['slug']) }}"
                         class="post-cover d-block bg-cover bg-center bg-norepeat"

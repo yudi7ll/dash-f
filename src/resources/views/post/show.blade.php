@@ -28,9 +28,7 @@
                         </small>
                         <small>{{ $post['created_at']->diffForHumans() }}</small>
                         @can('update', $post)
-                            <small class="ml-auto">
-                                <a class="btn btn-link btn-sm" href="{{ route('post.edit', $post['slug']) }}">{{ __('Edit') }}</a>
-                            </small>
+                            <a class="ml-2" href="{{ route('post.edit', $post['slug']) }}">{{ __('Edit') }}</a>
                         @endcan
                     </div>
 

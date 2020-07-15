@@ -14003,7 +14003,7 @@ body {
 }
 
 .post-cover {
-  padding-top: 75%;
+  height: 100%;
 }
 
 @media (max-width: 767.98px) {
