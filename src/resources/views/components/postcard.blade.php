@@ -2,9 +2,7 @@
 @foreach ($posts['data'] as $key => $post)
     <div class="card mb-1">
         @if ($posts['current_page'] === 1 && $key === 0)
-            @if ($post['cover'])
-                <a href="{{ route('post.show', $post['slug']) }}" class="post-cover-large d-block bg-cover bg-center bg-norepeat" style="background-image: url('{{ $post['cover'] }}');"></a>
-            @endif
+            <a href="{{ route('post.show', $post['slug']) }}" class="post-cover-large d-block bg-cover bg-center bg-norepeat" style="background-image: url('{{ $post['cover'] }}');"></a>
             <div class="card-body">
                 <h5 class="card-title">
                     <h4 title="{{ $post['title'] }}">
@@ -27,7 +25,7 @@
                         href="{{ route('post.show', $post['slug']) }}"
                         class="post-cover d-block bg-cover bg-center bg-norepeat"
                         style="background-image: url('{{ $post['cover'] }}');"
-                    ></a>
+                        ></a>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">

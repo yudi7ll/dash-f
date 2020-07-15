@@ -27,7 +27,7 @@ class StorePostRequest extends FormRequest
             'title' => 'required|string|max:255',
             'published' => 'nullable|string',
             'description' => 'required|string',
-            'cover' => 'active_url|nullable',
+            'cover' => 'required|active_url',
             'body' => 'required|string'
         ];
     }
