@@ -2,12 +2,15 @@
 
 namespace App;
 
+use Conner\Tagging\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Post extends Model
 {
+    use Taggable;
+
     protected $path = 'public/posts/';
     protected $fillable = [
         'user_id',

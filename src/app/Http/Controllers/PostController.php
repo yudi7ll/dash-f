@@ -25,13 +25,12 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = collect(
-            $this->post
-                 ->with('user')
-                 ->latest()
-                 ->where('published', true)
-                 ->paginate(8)
-        );
+        $posts = $this->post
+                      ->with('user')
+                      ->with('tagged')
+                      ->latest()
+                      ->where('published', true)
+                      ->paginate(8);
         $populars = $this->post->all()->take(10);
 
         if ($request->isXmlHttpRequest()) {
@@ -81,6 +80,8 @@ class PostController extends Controller
         $data->cover = $request->cover;
         $data->body = $request->body;
         $data->saveOrFail();
+
+        $data->tag(explode(',', $request->tags));
 
         return redirect()
             ->route('post.show', $data->slug)
@@ -140,6 +141,8 @@ class PostController extends Controller
         $post->cover = $request->cover;
         $post->body = $request->body;
         $post->saveOrFail();
+
+        $post->retag(explode(',', $request->tags));
 
         return redirect()
             ->route('post.show', $post->slug)

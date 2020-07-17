@@ -35,6 +35,9 @@
                     <img class="w-100 d-block" src="{{ $post['cover'] }}" alt="{{ $post['title'] }}" />
 
                     <div class="my-3">
+                        @foreach ($post->tagNames() as $key => $tag)
+                            <a href="{{ route('tags', $post->tagged[$key]->tag_slug) }}">#{{ $tag }}</a>
+                        @endforeach
                         {!! (new Markdown)->convertToHtml($post['body']) !!}
                     </div>
                 </section>

@@ -26,6 +26,9 @@ Route::get('/profile/me', 'UserController@authProfile')->name('profile.me');
 Route::get('/{user:id}/post', 'PostController@userPost')->name('user.post');
 Route::resource('post', 'PostController');
 
+// tags
+Route::get('tags/{tags}', 'PostController@tags')->name('tags');
+
 // comments
 Route::resource('comment', 'CommentController');
 

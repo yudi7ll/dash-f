@@ -1,7 +1,7 @@
 @isset($posts)
-@foreach ($posts['data'] as $key => $post)
+@foreach ($posts->items() as $key => $post)
     <div class="card mb-1">
-        @if ($posts['current_page'] === 1 && $key === 0)
+        @if ($posts->currentPage() === 1 && $key === 0)
             <a href="{{ route('post.show', $post['slug']) }}" class="post-cover-large d-block bg-cover bg-center bg-norepeat" style="background-image: url('{{ $post['cover'] }}');"></a>
             <div class="card-body">
                 <h5 class="card-title">
@@ -11,6 +11,11 @@
                 </h5>
                 <p class="card-text" title="{{ $post['description'] }}">{{ $post['description'] }}</p>
                 <p class="card-text">
+                <p>
+                    @foreach ($post->tagNames() as $tag)
+                        <a href="#">#{{ $tag }}</a>
+                    @endforeach
+                </p>
                 <small>
                     <a class="text-dark" href="{{ route('profile', $post['user']['id']) }}">{{ $post['user']['name'] }}</a>
                 </small>
@@ -25,7 +30,8 @@
                         href="{{ route('post.show', $post['slug']) }}"
                         class="post-cover d-block bg-cover bg-center bg-norepeat"
                         style="background-image: url('{{ $post['cover'] }}');"
-                        ></a>
+                    >
+                    </a>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">

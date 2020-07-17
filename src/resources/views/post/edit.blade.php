@@ -23,6 +23,10 @@
                     <input type="text" class="form-control" name="description" id="description" value="{{ $post['description'] }}">
                 </div>
                 <div class="form-group">
+                    <label for="tags-input">Tags</label>
+                    <input type="text" name="tags" id="tags-input" value="{{ implode(',', $post->tagNames()) }}">
+                </div>
+                <div class="form-group">
                     <label for="cover">Cover Image Url</label>
                     <input type="text" class="form-control" name="cover" id="cover" placeholder="https://image_url_example.com" value="{{ $post['cover'] }}">
                 </div>

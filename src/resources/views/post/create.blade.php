@@ -23,6 +23,10 @@
                         <input type="text" class="form-control" name="description" id="description" value="{{ old('description') }}">
                     </div>
                     <div class="form-group">
+                        <label for="cover">Tags</label>
+                        <input type="text" name="tags" id="tags-input" value="{{ old('tags') }}">
+                    </div>
+                    <div class="form-group">
                         <label for="cover">Cover Image Url</label>
                         <input type="text" class="form-control" name="cover" id="cover" placeholder="https://image_url_example.com" value="{{ old('cover') }}">
                     </div>

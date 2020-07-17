@@ -3,85 +3,39 @@
 @section('content')
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
     <div class="overflow-auto bg-white">
-        <div class="container sticky-top">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="overflow-hidden">
-                    <ul class="nav d-flex flex-nowrap py-2 overflow-hidden">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Active</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Active</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Active</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Active</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Active</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Active</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Active</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Active</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <div class="container">
+            <ul class="nav d-flex flex-nowrap py-2 justify-content-between align-items-center">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">#javascript</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">#python</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">#github</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">#react</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">#linux</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">#productivity</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">#ide</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">#typescript</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">#cybersecurity</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">#php</a>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="container py-4">
@@ -117,53 +71,4 @@
             </div>
         </div>
     </div>
-    <script charset="utf-8">
-        $(window).ready(function () {
-            let page = 1;
-            let isLoading = false;
-            const SITEURL = "{{ url('/') }}" + "?page=";
-            const loading = $('#loading');
-            const noData = $('#no-data');
-
-            load_more();
-
-            $(window).scroll(() => {
-                if($(window).scrollTop() + $(window).height() >= $(document).height()) {
-                    load_more();
-                }
-            });
-
-            function load_more() {
-                noData.hide();
-                loading.show();
-
-                const config = {
-                    headers: {
-                        'Content-Type': 'text/html',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                }
-
-                if (!isLoading) {
-                    isLoading = true;
-
-                    fetch(SITEURL + page, config)
-                        .then(res => res.text())
-                        .then(res => {
-                            if (!res) {
-                                noData.show();
-                                return;
-                            }
-
-                            $('#postcard').append(res);
-                            page++;
-                        })
-                        .finally(() => {
-                            loading.hide();
-                            isLoading = false;
-                        });
-                }
-            }
-        });
-    </script>
 @endsection
