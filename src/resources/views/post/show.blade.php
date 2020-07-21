@@ -58,42 +58,48 @@
                         <button type="submit" class="btn btn-primary d-block ml-auto" @guest disabled @endguest>Send</button>
                     </form>
                     <div class="mt-3">
-                        <ul id="comment-list" class="list-group list-group-flush">
-                            @foreach ($post['comment']->reverse() as $comment)
-                                <li class="list-group-item d-flex justify-content-between">
-                                    <span>
-                                        <strong>{{ $comment['user']['name'] }}</strong>, {{ $comment['content'] }}
-                                        <small class="text-secondary"> ( {{ $comment['created_at']->diffForHumans() }} ) </small>
-                                    </span>
-                                    <span>
-                                        @can('update', $comment)
-                                            <div class="btn-group">
-                                                <button type="button" class="bg-transparent border-0 edit-comment-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <button class="dropdown-item text-danger" type="button" onclick="deleteComment()"><i class="fa fa-trash"></i> Remove</button>
-                                                    <button class="dropdown-item" type="button"><i class="fa fa-pencil"></i> Edit</button>
-                                                    <button class="dropdown-item" type="button"><i class="fa fa-flag"></i> Report Abuse</button>
-                                                </div>
-                                            </div>
+                        @foreach ($post['comment']->reverse() as $comment)
+                            <div class="media py-3 border-bottom">
+                                <a href="{{ route('profile', $comment->user->id) }}">
+                                    <img src="{{ $comment->user->cover }}" class="mr-3" alt="{{ $comment->user->name }}" />
+                                </a>
+                                <div class="media-body">
+                                    <h6 class="mt-0">
+                                        <a class="text-dark" href="{{ route('profile', $comment->user->id) }}">{{ $comment->user->username }}</a>
+                                    </h6>
+                                    <small>{{ $comment->created_at->diffForHumans() }}</small>
+                                    @if ($comment->created_at != $comment->updated_at)
+                                        <small>( Edited )</small>
+                                    @endif
+                                    <div>{{ $comment->content }}</div>
+                                </div>
 
-                                            <form id="delete-comment-form" action="{{ route('comment.destroy', $comment->id) }}" method="post">
-                                                @csrf
-                                                @method('delete')
-                                            </form>
+                                @can('update', $comment)
+                                    <div class="btn-group">
+                                        <button type="button" class="bg-transparent border-0 edit-comment-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <button class="dropdown-item text-danger" type="button" onclick="deleteComment()"><i class="fa fa-trash"></i> Remove</button>
+                                            <button class="dropdown-item" type="button"><i class="fa fa-pencil"></i> Edit</button>
+                                            <button class="dropdown-item" type="button"><i class="fa fa-flag"></i> Report Abuse</button>
+                                        </div>
+                                    </div>
 
-                                            <script>
-                                                function deleteComment() {
-                                                    confirm('Your comment will be deleted permanently!\nContinue?')
-                                                        && document.getElementById('delete-comment-form').submit();
-                                                }
-                                            </script>
-                                        @endcan
-                                    </span>
-                                </li>
-                            @endforeach
-                        </ul>
+                                    <form id="delete-comment-form" action="{{ route('comment.destroy', $comment->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                    </form>
+                                    <script>
+                                        function deleteComment() {
+                                            confirm('Your comment will be deleted permanently!\nContinue?')
+                                                && document.getElementById('delete-comment-form').submit();
+                                        }
+                                    </script>
+                                @endcan
+                            </div>
+                            </span>
+                        @endforeach
                     </div>
                 </section>
             </article>
