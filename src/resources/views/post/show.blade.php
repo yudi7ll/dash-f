@@ -67,7 +67,28 @@
                                     </span>
                                     <span>
                                         @can('update', $comment)
-                                            <button type="button" class="btn btn-secondary btn-sm">{{ __('Edit') }}</button>
+                                            <div class="btn-group">
+                                                <button type="button" class="bg-transparent border-0 edit-comment-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <button class="dropdown-item text-danger" type="button" onclick="deleteComment()"><i class="fa fa-trash"></i> Remove</button>
+                                                    <button class="dropdown-item" type="button"><i class="fa fa-pencil"></i> Edit</button>
+                                                    <button class="dropdown-item" type="button"><i class="fa fa-flag"></i> Report Abuse</button>
+                                                </div>
+                                            </div>
+
+                                            <form id="delete-comment-form" action="{{ route('comment.destroy', $comment->id) }}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                            </form>
+
+                                            <script>
+                                                function deleteComment() {
+                                                    confirm('Your comment will be deleted permanently!\nContinue?')
+                                                        && document.getElementById('delete-comment-form').submit();
+                                                }
+                                            </script>
                                         @endcan
                                     </span>
                                 </li>

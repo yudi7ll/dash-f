@@ -33,7 +33,7 @@
                             @endguest
                             @auth
                                 <div class="dropdown">
-                                    <button class="border-0 bg-transparent dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button class="border-0 bg-transparent" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         @if (auth()->user()->cover == 'default.jpg')
                                             <i class="fa fa-user-circle fa-fw fa-lg text-muted"></i>
                                         @else
