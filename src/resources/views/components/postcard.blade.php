@@ -10,12 +10,12 @@
                     </h4>
                 </h5>
                 <p class="card-text" title="{{ $post['description'] }}">{{ $post['description'] }}</p>
-                <p class="card-text">
-                <p>
-                    @foreach ($post->tagNames() as $tag)
-                        <a href="#">#{{ $tag }}</a>
+                <small class="card-text">
+                    @foreach ($post->tagged as $tag)
+                        <a href="{{ route('tags', $tag->tag_slug) }}">#{{ $tag->tag_name }}</a>
                     @endforeach
-                </p>
+                </small>
+                <p class="card-text">
                 <small>
                     <a class="text-dark" href="{{ route('profile', $post['user']['id']) }}">{{ $post['user']['name'] }}</a>
                 </small>
@@ -39,12 +39,17 @@
                             <a class="text-dark" href="{{ route('post.show', $post['slug']) }}" title="{{ $post['title'] }}">{{ $post['title'] }}</a>
                         </h5>
                         <p class="card-text" title="{{ $post['description'] }}">{{ $post['description'] }}</p>
-                        <p class="card-text">
-                        <small>
-                            <a class="text-dark" href="{{ route('profile', $post['user']['id']) }}">{{ $post['user']['name'] }}</a>
+                        <small class="card-text">
+                            @foreach ($post->tagged as $tag)
+                                <a href="{{ route('tags', $tag->tag_slug) }}">#{{ $tag->tag_name }}</a>
+                            @endforeach
                         </small>
-                        <span> . </span>
-                        <small class="text-muted">{{ \Carbon\Carbon::parse($post['updated_at'])->diffForHumans() }}</small>
+                        <p class="card-text">
+                            <small>
+                                <a class="text-dark" href="{{ route('profile', $post['user']['id']) }}">{{ $post['user']['name'] }}</a>
+                            </small>
+                            <span> . </span>
+                            <small class="text-muted">{{ \Carbon\Carbon::parse($post['updated_at'])->diffForHumans() }}</small>
                         </p>
                     </div>
                 </div>

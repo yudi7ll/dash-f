@@ -17,6 +17,7 @@ class Post extends Model
         'title',
         'published',
         'description',
+        'tags',
         'cover',
         'body',
     ];

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Post;
 use App\User;
+use Conner\Tagging\Model\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,14 +33,30 @@ class PostController extends Controller
                       ->where('published', true)
                       ->paginate(8);
         $populars = $this->post->all()->take(10);
+        $tags = Tag::limit(15)->get();
+        debug($tags);
 
         if ($request->isXmlHttpRequest()) {
-            return view('components.postcard')->with('posts', $posts);
+            return view('components.postcard', compact('posts'));
         }
 
         return view('home')
-            ->with('populars', $populars);
+            ->with('populars', $populars)
+            ->with('tags', $tags);
     }
+
+    /*
+     * Display a listing of the resource by tags
+     *
+     * @return Response
+     */
+    public function tags($tags)
+    {
+        $posts = $this->post->withAllTags($tags)->get();
+
+        return view('post.tags', compact('posts'));
+    }
+
 
     /**
      * Display a listing of the owned posts
