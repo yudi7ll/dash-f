@@ -1,14 +1,22 @@
-$(window).ready(function () {
+const config = {
+    headers: {
+        'Content-Type': 'text/html',
+        'X-Requested-With': 'XMLHttpRequest'
+    }
+}
+const BASEURL = document.location.origin;
+
+async function infiniteSroll() {
     let page = 1;
     let isLoading = false;
-    const SITEURL = document.location.origin + "?page=";
+    const SITEURL = BASEURL + "/api/post?page=";
     const loading = $('#loading');
     const noData = $('#no-data');
 
     load_more();
 
     $(window).scroll(() => {
-        if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+        if($(window).scrollTop() + $(window).height() >= $(document).height() - 200) {
             load_more();
         }
     });
@@ -16,13 +24,6 @@ $(window).ready(function () {
     async function load_more() {
         noData.hide();
         loading.show();
-
-        const config = {
-            headers: {
-                'Content-Type': 'text/html',
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        }
 
         if (!isLoading) {
             isLoading = true;
@@ -46,4 +47,24 @@ $(window).ready(function () {
             }
         }
     }
+}
+
+async function popular() {
+    const url = BASEURL + '/api/populars';
+    const res = await fetch(url, config);
+
+    $('#sidebar').html(await res.text());
+}
+
+async function tags() {
+    const url = BASEURL + '/api/tagscard';
+    const res = await fetch(url, config)
+
+    $('#tagscard').html(await res.text());
+}
+
+$(window).ready(async function () {
+    await infiniteSroll();
+    await popular();
+    await tags();
 });

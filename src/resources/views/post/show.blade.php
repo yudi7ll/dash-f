@@ -20,7 +20,7 @@
                             <span>{{ __('Only you can see & edit this post') }}</span>
                         </div>
                     @endif
-                    <h1> {{ $post['title'] }} </h1>
+                    <h2> {{ $post['title'] }} </h2>
                     <h5 class="font-weight-normal">{{ $post['description'] }}</h5>
                     <div class="mb-2">
                         <small>
@@ -38,7 +38,7 @@
                     <div class="my-3">
                         <div class="tags mb-3">
                             @foreach ($post->tagged as $tag)
-                                <a href="{{ route('tags', $tag->tag_slug) }}">#{{ $tag->tag_name }}</a>
+                                <a href="{{ route('tags.post', $tag->tag_slug) }}">#{{ $tag->tag_name }}</a>
                             @endforeach
                         </div>
                         {!! (new Markdown)->convertToHtml($post['body']) !!}
@@ -50,9 +50,12 @@
                         @csrf
                         <div class="form-group">
                             <input type="hidden" value="{{ $post['id'] }}" name="post_id" id="post_id" />
-                            <textarea class="form-control" name="content" rows="5" placeholder="Write a comment...">{{ old('content') }}</textarea>
+                            <textarea class="form-control" name="content" rows="5" placeholder="Write a comment..."  @guest disabled @endguest>{{ old('content') }}</textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary d-block ml-auto">Send</button>
+                        @guest
+                            <small style="float: left">Please <a href="{{ route('login') }}">Login</a> before comment</small>
+                        @endguest
+                        <button type="submit" class="btn btn-primary d-block ml-auto" @guest disabled @endguest>Send</button>
                     </form>
                     <div class="mt-3">
                         <ul id="comment-list" class="list-group list-group-flush">

@@ -7347,7 +7347,8 @@ button.bg-danger:focus {
   background-color: #bd2130 !important;
 }
 
-.bg-light {
+.bg-light,
+html {
   background-color: #f8f9fa !important;
 }
 

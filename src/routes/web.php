@@ -27,7 +27,8 @@ Route::get('/{user:id}/post', 'PostController@userPost')->name('user.post');
 Route::resource('post', 'PostController');
 
 // tags
-Route::get('tags/{tags}', 'PostController@tags')->name('tags');
+Route::get('tags', 'TagController@index')->name('tags');
+Route::get('tags/{tag}', 'TagController@post')->name('tags.post');
 
 // comments
 Route::resource('comment', 'CommentController');

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
     <div class="container py-4">
         <div class="row justify-content-between">
             <div class="col-lg-8">
@@ -31,7 +30,10 @@
                 </center>
             </div>
             <div class="col-lg-4 d-none d-lg-block">
-                @include('components.sidebar')
+                <div id="sidebar">
+                    @include('components.sidebar')
+                </div>
+                <div id="tagscard"></div>
             </div>
         </div>
     </div>

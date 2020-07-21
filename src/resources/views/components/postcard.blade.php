@@ -12,7 +12,7 @@
                 <p class="card-text" title="{{ $post['description'] }}">{{ $post['description'] }}</p>
                 <small class="card-text">
                     @foreach ($post->tagged as $tag)
-                        <a href="{{ route('tags', $tag->tag_slug) }}">#{{ $tag->tag_name }}</a>
+                        <a href="{{ route('tags.post', $tag->tag_slug) }}">#{{ $tag->tag_name }}</a>
                     @endforeach
                 </small>
                 <p class="card-text">
@@ -41,7 +41,7 @@
                         <p class="card-text" title="{{ $post['description'] }}">{{ $post['description'] }}</p>
                         <small class="card-text">
                             @foreach ($post->tagged as $tag)
-                                <a href="{{ route('tags', $tag->tag_slug) }}">#{{ $tag->tag_name }}</a>
+                                <a href="{{ route('tags.post', $tag->tag_slug) }}">#{{ $tag->tag_name }}</a>
                             @endforeach
                         </small>
                         <p class="card-text">

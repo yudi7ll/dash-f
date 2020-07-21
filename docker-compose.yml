@@ -50,3 +50,22 @@ services:
     networks:
       - laravel
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_DB_SERVER: mysql
+      PMA_USER: homestead
+      PMA_PASSWORD: password
+    restart: always
+    ports:
+      - "8081:80"
+    links:
+      - nginx
+      - mysql
+    volumes:
+      - ./mysql:/var/lib/mysql
+    networks:
+      - laravel
