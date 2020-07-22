@@ -26,7 +26,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./mysql:/var/lib/mysql
+      - dbdata:/var/lib/mysql
     environment:
       MYSQL_DATABASE: homestead
       MYSQL_USER: homestead
@@ -62,10 +62,10 @@ services:
     restart: always
     ports:
       - "8081:80"
-    links:
-      - nginx
-      - mysql
     volumes:
-      - ./mysql:/var/lib/mysql
+      - dbdata:/var/lib/mysql
     networks:
       - laravel
+
+volumes:
+  dbdata: {}
