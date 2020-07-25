@@ -24,7 +24,7 @@
                     <h5 class="font-weight-normal">{{ $post['description'] }}</h5>
                     <div class="mb-2">
                         <small>
-                            <a class="text-dark font-weight-bold" href="{{ route('profile', $post['user']['id']) }}">{{ $post['user']['name'] }}</a>
+                            <a class="text-dark font-weight-bold" href="{{ route('profile', $post['user']['username']) }}">{{ $post['user']['name'] }}</a>
                         </small>
                         <small>{{ $post['created_at']->diffForHumans() }}</small>
                         @can('update', $post)
@@ -60,12 +60,12 @@
                     <div class="mt-3">
                         @foreach ($post['comment']->reverse() as $comment)
                             <div class="media py-3 border-bottom">
-                                <a href="{{ route('profile', $comment->user->id) }}">
-                                    <img src="{{ $comment->user->cover }}" class="mr-3" alt="{{ $comment->user->name }}" />
+                                <a href="{{ route('profile', $comment->user->username) }}">
+                                    <img src="{{ route('cover.thumb', $comment->user->cover) }}" class="mr-3" alt="{{ $comment->user->name }}" />
                                 </a>
                                 <div class="media-body">
                                     <h6 class="mt-0">
-                                        <a class="text-dark" href="{{ route('profile', $comment->user->id) }}">{{ $comment->user->username }}</a>
+                                        <a class="text-dark" href="{{ route('profile', $comment->user->username) }}">{{ $comment->user->username }}</a>
                                     </h6>
                                     <small>{{ $comment->created_at->diffForHumans() }}</small>
                                     @if ($comment->created_at != $comment->updated_at)

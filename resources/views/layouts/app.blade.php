@@ -42,7 +42,7 @@
                                     </button>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="{{ route('profile.me') }}">Profile</a>
+                                        <a class="dropdown-item" href="{{ route('profile', Auth::user()->username) }}">Profile</a>
                                         <a class="dropdown-item" href="{{ route('post.create') }}">Write a post</a>
                                         <form action="{{ route('logout') }}" method="post">
                                             @csrf

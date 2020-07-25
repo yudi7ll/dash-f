@@ -1,8 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,10 +15,6 @@ Auth::routes();
 
 Route::get('/', 'PostController@index')->name('home');
 
-// users
-Route::get('/{user}')->name('profile');
-Route::get('/profile/me', 'UserController@authProfile')->name('profile.me');
-
 // posts
 Route::get('/{user:id}/post', 'PostController@userPost')->name('user.post');
 Route::resource('post', 'PostController');
@@ -33,11 +26,5 @@ Route::get('tags/{tag}', 'TagController@post')->name('tags.post');
 // comments
 Route::resource('comment', 'CommentController');
 
-// Route::get('/', 'PostController@index')->name('home');
-// Route::get('/post', 'PostController@create');
-//
-// Route::middleware('auth:web')->group(function () {
-//     Route::post('/post', 'PostController@store')
-// });
-
-// Route::get('/home', 'HomeController@index')->name('home');
+// users
+Route::get('/{user:username}', 'UserController@profile')->name('profile');

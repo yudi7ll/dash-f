@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,10 +11,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::namespace('Api')->group(function () {
+    Route::get('post', 'PostController@index');
+    Route::get('populars', 'PostController@populars');
+    Route::get('tagscard', 'TagController@index');
 
-Route::get('post', 'Api\PostController@index');
-Route::get('populars', 'Api\PostController@populars');
-Route::get('tagscard', 'Api\TagController@index');
+    // images
+    Route::get('cover/{cover}', 'ImageController@getCoverImage')->name('cover');
+    Route::get('cover/{cover}/thumb', 'ImageController@getCoverThumb')->name('cover.thumb');
+});
+
