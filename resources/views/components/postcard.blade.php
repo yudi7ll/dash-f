@@ -17,7 +17,7 @@
                 </small>
                 <p class="card-text">
                 <small>
-                    <a class="text-dark" href="{{ route('profile', $post['user']['id']) }}">{{ $post['user']['name'] }}</a>
+                    <a class="text-dark" href="{{ route('profile', $post['user']['username']) }}">{{ $post['user']['name'] }}</a>
                 </small>
                 <span> . </span>
                 <small class="text-muted">{{ \Carbon\Carbon::parse($post['updated_at'])->diffForHumans() }}</small>
@@ -46,7 +46,7 @@
                         </small>
                         <p class="card-text">
                             <small>
-                                <a class="text-dark" href="{{ route('profile', $post['user']['id']) }}">{{ $post['user']['name'] }}</a>
+                                <a class="text-dark" href="{{ route('profile', $post['user']['username']) }}">{{ $post['user']['name'] }}</a>
                             </small>
                             <span> . </span>
                             <small class="text-muted">{{ \Carbon\Carbon::parse($post['updated_at'])->diffForHumans() }}</small>

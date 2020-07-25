@@ -61,7 +61,7 @@
                         @foreach ($post['comment']->reverse() as $comment)
                             <div class="media py-3 border-bottom">
                                 <a href="{{ route('profile', $comment->user->username) }}">
-                                    <img src="{{ route('cover.thumb', $comment->user->cover) }}" class="mr-3" alt="{{ $comment->user->name }}" />
+                                    <img class="mr-3 img-circle" src="{{ route('cover.thumb', $comment->user->cover) }}" alt="{{ $comment->user->name }}" />
                                 </a>
                                 <div class="media-body">
                                     <h6 class="mt-0">

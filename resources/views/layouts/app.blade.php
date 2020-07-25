@@ -34,15 +34,11 @@
                             @auth
                                 <div class="dropdown">
                                     <button class="border-0 bg-transparent" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        @if (auth()->user()->cover == 'default.jpg')
-                                            <i class="fa fa-user-circle fa-fw fa-lg text-muted"></i>
-                                        @else
-                                            <img class="" src="{{ auth()->user()->cover }}" alt="{{ auth()->user()->name }}">
-                                        @endif
+                                        <img class="img-circle img-fluid" src="{{ route('cover.thumb', auth()->user()->cover) }}" alt="{{ auth()->user()->username }}">
                                     </button>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="{{ route('profile', Auth::user()->username) }}">Profile</a>
+                                        <a class="dropdown-item" href="{{ route('profile', auth()->user()->username) }}">Profile</a>
                                         <a class="dropdown-item" href="{{ route('post.create') }}">Write a post</a>
                                         <form action="{{ route('logout') }}" method="post">
                                             @csrf
