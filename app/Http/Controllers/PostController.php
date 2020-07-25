@@ -5,46 +5,28 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Post;
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-    private $post;
-
-    public function __construct(Post $post)
+    public function __construct()
     {
         $this->middleware('auth:web')->except(['index', 'show']);
-
-        $this->post = $post;
     }
     /**
-     * Display a listing of the resource.
+     * Display a initial view with listing of the posts, popular posts & tags.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View
      */
-    public function index(Request $request)
+    public function index()
     {
-        $posts = $this->post
-                      ->with('user')
-                      ->with('tagged')
-                      ->latest()
-                      ->where('published', true)
-                      ->paginate(8);
-        $populars = $this->post->all()->take(10);
-
-        if ($request->isXmlHttpRequest()) {
-            return view('components.postcard')->with('posts', $posts);
-        }
-
-        return view('home')
-            ->with('populars', $populars);
+        return view('home');
     }
 
     /**
      * Display a listing of the owned posts
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View
      */
     public function userPost(User $user)
     {
@@ -56,7 +38,7 @@ class PostController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View
      */
     public function create()
     {
@@ -92,7 +74,7 @@ class PostController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View
      */
     public function show(Post $post)
     {
@@ -112,7 +94,7 @@ class PostController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View
      */
     public function edit(Post $post)
     {
@@ -125,7 +107,7 @@ class PostController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Support\Facades\Redirect
      */
     public function update(StorePostRequest $request, Post $post)
     {
@@ -153,7 +135,7 @@ class PostController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Support\Facades\Redirect
      */
     public function destroy(Post $post)
     {

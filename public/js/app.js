@@ -41892,13 +41892,22 @@ module.exports = function(module) {
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-__webpack_require__(/*! ./infinite-scroll */ "./resources/js/infinite-scroll.js");
-
+document.location.pathname === '/' && __webpack_require__(/*! ./homepage */ "./resources/js/homepage.js");
 $('#tags-input').selectize({
   delimiter: ',',
   persist: false,
@@ -41909,6 +41918,42 @@ $('#tags-input').selectize({
     };
   }
 });
+
+function tags() {
+  return _tags.apply(this, arguments);
+}
+
+function _tags() {
+  _tags = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+    var url, res;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            url = BASEURL + '/api/tagscard';
+            _context.next = 3;
+            return fetch(url, config);
+
+          case 3:
+            res = _context.sent;
+            _context.t0 = $('#tagscard');
+            _context.next = 7;
+            return res.text();
+
+          case 7:
+            _context.t1 = _context.sent;
+
+            _context.t0.html.call(_context.t0, _context.t1);
+
+          case 9:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _tags.apply(this, arguments);
+}
 
 /***/ }),
 
@@ -41960,10 +42005,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/infinite-scroll.js":
-/*!*****************************************!*\
-  !*** ./resources/js/infinite-scroll.js ***!
-  \*****************************************/
+/***/ "./resources/js/homepage.js":
+/*!**********************************!*\
+  !*** ./resources/js/homepage.js ***!
+  \**********************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -41977,92 +42022,210 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-$(window).ready(function () {
-  var page = 1;
-  var isLoading = false;
-  var SITEURL = document.location.origin + "?page=";
-  var loading = $('#loading');
-  var noData = $('#no-data');
-  load_more();
-  $(window).scroll(function () {
-    if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-      load_more();
-    }
-  });
-
-  function load_more() {
-    return _load_more.apply(this, arguments);
+var config = {
+  headers: {
+    'Content-Type': 'text/html',
+    'X-Requested-With': 'XMLHttpRequest'
   }
+};
+var BASEURL = document.location.origin;
 
-  function _load_more() {
-    _load_more = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var config, res;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              noData.hide();
-              loading.show();
-              config = {
-                headers: {
-                  'Content-Type': 'text/html',
-                  'X-Requested-With': 'XMLHttpRequest'
-                }
-              };
+function infiniteSroll() {
+  return _infiniteSroll.apply(this, arguments);
+}
 
-              if (isLoading) {
-                _context.next = 26;
-                break;
+function _infiniteSroll() {
+  _infiniteSroll = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+    var page, isLoading, SITEURL, loading, noData, load_more, _load_more;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _load_more = function _load_more3() {
+              _load_more = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+                var res;
+                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+                  while (1) {
+                    switch (_context2.prev = _context2.next) {
+                      case 0:
+                        noData.hide();
+                        loading.show();
+
+                        if (isLoading) {
+                          _context2.next = 25;
+                          break;
+                        }
+
+                        isLoading = true;
+                        _context2.prev = 4;
+                        _context2.next = 7;
+                        return fetch(SITEURL + page, config);
+
+                      case 7:
+                        res = _context2.sent;
+                        _context2.next = 10;
+                        return res.text();
+
+                      case 10:
+                        res = _context2.sent;
+
+                        if (res) {
+                          _context2.next = 14;
+                          break;
+                        }
+
+                        noData.show();
+                        return _context2.abrupt("return");
+
+                      case 14:
+                        $('#postcard').append(res);
+                        page++;
+                        _context2.next = 21;
+                        break;
+
+                      case 18:
+                        _context2.prev = 18;
+                        _context2.t0 = _context2["catch"](4);
+                        noData.show();
+
+                      case 21:
+                        _context2.prev = 21;
+                        loading.hide();
+                        isLoading = false;
+                        return _context2.finish(21);
+
+                      case 25:
+                      case "end":
+                        return _context2.stop();
+                    }
+                  }
+                }, _callee2, null, [[4, 18, 21, 25]]);
+              }));
+              return _load_more.apply(this, arguments);
+            };
+
+            load_more = function _load_more2() {
+              return _load_more.apply(this, arguments);
+            };
+
+            page = 1;
+            isLoading = false;
+            SITEURL = BASEURL + "/api/post?page=";
+            loading = $('#loading');
+            noData = $('#no-data');
+            load_more();
+            $(window).scroll(function () {
+              if ($(window).scrollTop() + $(window).height() >= $(document).height() - 200) {
+                load_more();
               }
+            });
 
-              isLoading = true;
-              _context.prev = 5;
-              _context.next = 8;
-              return fetch(SITEURL + page, config);
-
-            case 8:
-              res = _context.sent;
-              _context.next = 11;
-              return res.text();
-
-            case 11:
-              res = _context.sent;
-
-              if (res) {
-                _context.next = 15;
-                break;
-              }
-
-              noData.show();
-              return _context.abrupt("return");
-
-            case 15:
-              $('#postcard').append(res);
-              page++;
-              _context.next = 22;
-              break;
-
-            case 19:
-              _context.prev = 19;
-              _context.t0 = _context["catch"](5);
-              noData.show();
-
-            case 22:
-              _context.prev = 22;
-              loading.hide();
-              isLoading = false;
-              return _context.finish(22);
-
-            case 26:
-            case "end":
-              return _context.stop();
-          }
+          case 9:
+          case "end":
+            return _context3.stop();
         }
-      }, _callee, null, [[5, 19, 22, 26]]);
-    }));
-    return _load_more.apply(this, arguments);
-  }
-});
+      }
+    }, _callee3);
+  }));
+  return _infiniteSroll.apply(this, arguments);
+}
+
+function popular() {
+  return _popular.apply(this, arguments);
+}
+
+function _popular() {
+  _popular = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+    var url, res;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            url = BASEURL + '/api/populars';
+            _context4.next = 3;
+            return fetch(url, config);
+
+          case 3:
+            res = _context4.sent;
+            _context4.t0 = $('#sidebar');
+            _context4.next = 7;
+            return res.text();
+
+          case 7:
+            _context4.t1 = _context4.sent;
+
+            _context4.t0.html.call(_context4.t0, _context4.t1);
+
+          case 9:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+  return _popular.apply(this, arguments);
+}
+
+function tags() {
+  return _tags.apply(this, arguments);
+}
+
+function _tags() {
+  _tags = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+    var url, res;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            url = BASEURL + '/api/tagscard';
+            _context5.next = 3;
+            return fetch(url, config);
+
+          case 3:
+            res = _context5.sent;
+            _context5.t0 = $('#tagscard');
+            _context5.next = 7;
+            return res.text();
+
+          case 7:
+            _context5.t1 = _context5.sent;
+
+            _context5.t0.html.call(_context5.t0, _context5.t1);
+
+          case 9:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5);
+  }));
+  return _tags.apply(this, arguments);
+}
+
+$(window).ready( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return infiniteSroll();
+
+        case 2:
+          _context.next = 4;
+          return popular();
+
+        case 4:
+          _context.next = 6;
+          return tags();
+
+        case 6:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, _callee);
+})));
 
 /***/ }),
 
