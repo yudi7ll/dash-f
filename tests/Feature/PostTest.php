@@ -4,14 +4,11 @@ namespace Tests\Feature;
 
 use App\Post;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class PostTest extends TestCase
 {
-    use DatabaseMigrations;
-
     public function test_user_should_be_able_to_visit_create_post_form()
     {
         $user = factory(User::class)->create();
@@ -34,7 +31,6 @@ class PostTest extends TestCase
          $response
              ->assertSuccessful()
              ->assertSeeInOrder($post);
-         $this->assertDatabaseCount('posts', 20);
     }
 
     public function test_should_be_able_to_see_post_that_has_been_published()
