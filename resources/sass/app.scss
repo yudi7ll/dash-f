@@ -38,17 +38,9 @@ section {
     }
 }
 
-.bg-cover {
-    background-size: cover;
-}
-
-.bg-center {
-    background-position: center;
-}
-
-.bg-norepeat {
-    background-repeat: no-repeat;
-}
+.bg-cover { background-size: cover; }
+.bg-center { background-position: center; }
+.bg-norepeat { background-repeat: no-repeat; }
 
 .post-cover {
     height: 100%;
@@ -64,4 +56,8 @@ section {
 
 .img-circle {
     border-radius: 10rem;
+}
+
+input {
+    outline: none;
 }
