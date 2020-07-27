@@ -11,7 +11,18 @@ class Post extends Model
 {
     use Taggable;
 
+    /**
+     * The path to post content
+     *
+     * @var string
+     */
     protected $path = 'public/posts/';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'user_id',
         'title',
@@ -34,8 +45,8 @@ class Post extends Model
 
     public function setSlugAttribute()
     {
-        $this->attributes['slug'] = Str::slug($this->attributes['title'], '-')
-            .'-' . Str::random(10);
+        $slug = Str::slug($this->attributes['title'], '-') . '-' . Str::random(10);
+        $this->attributes['slug'] = $slug;
     }
 
     public function setPublishedAttribute($value)

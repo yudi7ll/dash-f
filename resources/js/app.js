@@ -12,10 +12,3 @@ $('#tags-input').selectize({
         }
     }
 });
-
-async function tags() {
-    const url = BASEURL + '/api/tagscard';
-    const res = await fetch(url, config)
-
-    $('#tagscard').html(await res.text());
-}

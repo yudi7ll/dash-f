@@ -14,6 +14,9 @@ class UserController extends Controller
      */
     public function profile(User $user)
     {
-        return $user;
+        $posts = $user->post()->latest()->paginate(8);
+
+        return view('user.profile')
+            ->nest('postcard', 'components.postcard', compact('posts'));
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Post;
-use App\User;
+use Conner\Tagging\Model\Tag;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -16,29 +16,28 @@ class PostController extends Controller
     /**
      * Display a initial view with listing of the posts, popular posts & tags.
      *
-     * @return \Illuminate\View
+     * @return \Illuminate\Support\Facades\View
      */
     public function index()
     {
-        return view('home');
-    }
+        $posts = Post::with('user')
+                    ->with('tagged')
+                    ->latest()
+                    ->where('published', true)
+                    ->paginate(8);
+        $populars = Post::all()->take(10);
+        $tags = Tag::limit(8)->orderByDesc('count')->get();
 
-    /**
-     * Display a listing of the owned posts
-     *
-     * @return \Illuminate\View
-     */
-    public function userPost(User $user)
-    {
-        $posts = collect($user->post()->paginate(10));
-
-        return view('home', compact('posts'));
+        return view('home')
+            ->nest('postcard', 'components.postcard', compact('posts'))
+            ->nest('sidebar', 'components.sidebar', compact('populars'))
+            ->nest('tags', 'components.tagscard', compact('tags'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View
+     * @return \Illuminate\Support\Facades\View
      */
     public function create()
     {
@@ -74,7 +73,7 @@ class PostController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Post  $post
-     * @return \Illuminate\View
+     * @return \Illuminate\Support\Facades\View
      */
     public function show(Post $post)
     {
@@ -94,7 +93,7 @@ class PostController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Post  $post
-     * @return \Illuminate\View
+     * @return \Illuminate\Support\Facades\View
      */
     public function edit(Post $post)
     {

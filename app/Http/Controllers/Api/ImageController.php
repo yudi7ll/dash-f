@@ -12,6 +12,20 @@ class ImageController extends Controller
     private $coverPath = 'public/images/cover/';
     private $coverThumbPath = 'public/images/thumb/';
 
+    /**
+     * Get image from url with specified size
+     *
+     * @param width
+     * @param height
+     * @return \Intervention\Image\Facades\Image
+     */
+    public function index($width, $height)
+    {
+        $img = Image::make(request('url'))->fit($width, $height);
+
+        return $img->response($img->mime());
+    }
+
     protected function getImageFile($cover)
     {
         try {
@@ -25,7 +39,7 @@ class ImageController extends Controller
      * Get the image of the specified filename
      *
      * @param $cover
-     * @return \Intervention\Image
+     * @return \Intervention\Image\Facades\Image
      */
     public function getCoverImage($cover)
     {
@@ -39,7 +53,7 @@ class ImageController extends Controller
      * Get the cover thumbnail of the specified filename
      *
      * @param $cover
-     * @return \Intervention\Image
+     * @return \Intervention\Image\Facades\Image
      */
     public function getCoverThumb($cover)
     {

@@ -19,5 +19,6 @@ Route::namespace('Api')->group(function () {
     // images
     Route::get('cover/{cover}', 'ImageController@getCoverImage')->name('cover');
     Route::get('cover/{cover}/thumb', 'ImageController@getCoverThumb')->name('cover.thumb');
+    Route::get('image/{width}/{height}', 'ImageController@index')->name('image');
 });
 

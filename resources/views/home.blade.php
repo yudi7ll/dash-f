@@ -10,7 +10,7 @@
                     </div>
                 @endif
                 <div id="postcard">
-                    @include('components.postcard')
+                    {!! $postcard !!}
                 </div>
                 <center class="my-4">
                     <div id="loading" style="display: none;">
@@ -31,9 +31,11 @@
             </div>
             <div class="col-lg-4 d-none d-lg-block">
                 <div id="sidebar">
-                    @include('components.sidebar')
+                    {!! $sidebar !!}
                 </div>
-                <div id="tagscard"></div>
+                <div id="tagscard">
+                    {!! $tags !!}
+                </div>
             </div>
         </div>
     </div>
