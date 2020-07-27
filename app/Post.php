@@ -33,27 +33,56 @@ class Post extends Model
         'body',
     ];
 
+    /**
+     * The attribute name to be use as Route Key
+     *
+     * @return string
+     */
     public function getRouteKeyName()
     {
         return 'slug';
     }
 
+    /**
+     * Set the user_id to be auth id
+     *
+     * @return void
+     */
     public function setUserIdAttribute()
     {
         $this->attributes['user_id'] = auth()->id();
     }
 
+
+    /**
+     * Make slug attribute using title attribute
+     *
+     * @return void
+     */
     public function setSlugAttribute()
     {
         $slug = Str::slug($this->attributes['title'], '-') . '-' . Str::random(10);
         $this->attributes['slug'] = $slug;
     }
 
+
+    /**
+     * Convert Published attribute to boolean
+     *
+     * @return void
+     */
     public function setPublishedAttribute($value)
     {
         $this->attributes['published'] = $value === "on";
     }
 
+
+    /**
+     * Process body markdown & set the body attribute to be the filename
+     *
+     * @param string
+     * @return void
+     */
     public function setBodyAttribute($value)
     {
         $filename = $this->attributes['slug'] . '.md';
@@ -64,6 +93,12 @@ class Post extends Model
         $this->attributes['body'] = $filename;
     }
 
+    /**
+     * Get body markdown content
+     *
+     * @param string
+     * @return string
+     */
     public function getBodyAttribute($value)
     {
         return Storage::get($this->path . $value);
