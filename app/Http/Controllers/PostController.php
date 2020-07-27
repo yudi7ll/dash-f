@@ -30,7 +30,7 @@ class PostController extends Controller
 
         return view('home')
             ->nest('postcard', 'components.postcard', compact('posts'))
-            ->nest('sidebar', 'components.sidebar', compact('populars'))
+            ->nest('popular_post', 'components.popular-post', compact('populars'))
             ->nest('tags', 'components.tagscard', compact('tags'));
     }
 

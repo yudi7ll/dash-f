@@ -31,7 +31,7 @@
             </div>
             <div class="col-lg-4 d-none d-lg-block">
                 <div id="sidebar">
-                    {!! $sidebar !!}
+                    {!! $popular_post !!}
                 </div>
                 <div id="tagscard">
                     {!! $tags !!}
