@@ -1,5 +1,18 @@
 {
+    "name": "DashF",
+    "type": "project",
+    "description": "Open Source Community",
+    "keywords": [
+        "dashf",
+        "laravel",
+        "community"
+    ],
+    "license": "MIT",
     "private": true,
+    "version": "0.0.1",
+    "engines": {
+        "node": "12.x"
+    },
     "scripts": {
         "dev": "npm run development",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
