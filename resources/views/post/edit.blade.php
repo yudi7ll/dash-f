@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/create-form.css') }}">
+    <script defer src="{{ asset('js/create-form.js') }}"></script>
 
     <div class="container py-4">
         @foreach ($errors->all() as $error)
@@ -53,10 +53,7 @@
             @method('DELETE')
         </form>
     </div>
-
-    <script charset="utf-8">
-        new SimpleMDE({ element: document.getElementById("body") });
-
+    <script>
         function deletePost() {
             confirm('Are you sure?') && document.getElementById('destroy-form').submit();
         }

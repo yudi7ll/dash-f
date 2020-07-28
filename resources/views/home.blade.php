@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    <script defer src="{{ asset('js/infinite-scroll.js') }}"></script>
+
     <div class="container py-4">
         <div class="row justify-content-between">
             <div class="col-lg-8">

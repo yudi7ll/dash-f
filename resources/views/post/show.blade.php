@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/pojoaque.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/highlight.css') }}">
+    <script src="{{ asset('js/highlight.js') }}"></script>
 
     <style type="text/css" media="screen">
         .hljs {
@@ -105,5 +105,4 @@
             </article>
         </div>
     </div>
-    <script>hljs.initHighlightingOnLoad();</script>
 @endsection

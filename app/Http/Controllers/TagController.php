@@ -21,7 +21,6 @@ class TagController extends Controller
             ->with('tagged')
             ->where('published', true)
             ->paginate(8);
-        debug($posts);
 
         return view('post.tags')
             ->nest('postcard', 'components.postcard', compact('posts'));

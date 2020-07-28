@@ -1,10 +1,7 @@
-@isset($posts)
 @foreach ($posts->items() as $key => $post)
     <div class="card mb-1">
         @if ($posts->currentPage() === 1 && $key === 0)
-            <a href="{{ route('post.show', $post['slug']) }}">
-                <img loading="lazy" class="post-cover w-100" src="{{ $post['cover'] }}" alt="{{ $post['slug'] }}">
-            </a>
+            <a class="post-cover post-cover-lg" href="{{ route('post.show', $post['slug']) }}" style="background-image: url('{{ $post['cover'] }}');"></a>
             <div class="card-body">
                 <h5 class="card-title">
                     <h4 title="{{ $post['title'] }}">
@@ -28,9 +25,7 @@
         @else
             <div class="row no-gutters flex-md-row-reverse">
                 <div class="col-md-4 p-0 p-md-3">
-                    <a href="{{ route('post.show', $post['slug']) }}" >
-                        <img loading="lazy" class="post-cover img-fluid" src="{{ $post['cover'] }}" alt="{{ $post['slug'] }}">
-                    </a>
+                    <a class="post-cover" href="{{ route('post.show', $post['slug']) }}" style="background-image: url('{{ $post['cover'] }}');"></a>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
@@ -44,11 +39,11 @@
                             @endforeach
                         </small>
                         <p class="card-text">
-                            <small>
-                                <a class="text-dark" href="{{ route('profile', $post['user']['username']) }}">{{ $post['user']['name'] }}</a>
-                            </small>
-                            <span> . </span>
-                            <small class="text-muted">{{ \Carbon\Carbon::parse($post['updated_at'])->diffForHumans() }}</small>
+                        <small>
+                            <a class="text-dark" href="{{ route('profile', $post['user']['username']) }}">{{ $post['user']['name'] }}</a>
+                        </small>
+                        <span> . </span>
+                        <small class="text-muted">{{ \Carbon\Carbon::parse($post['updated_at'])->diffForHumans() }}</small>
                         </p>
                     </div>
                 </div>
@@ -56,4 +51,3 @@
         @endif
     </div>
 @endforeach
-@endisset

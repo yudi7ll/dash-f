@@ -1,11 +1,5 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-// Font Awesome
-@import '~font-awesome';
-@import '~selectize/dist/css/selectize.css';
 
 // Variables
 @import 'variables';
@@ -18,16 +12,26 @@ body {
     font-family: $font-family-sans-serif;
 }
 
-.logo {
-    @extend .text-muted;
-    font-family: $font-logo;
-}
-
 section {
     @extend .bg-white;
     @extend .rounded;
     @extend .border;
     @extend .p-3;
+}
+
+.with-svg {
+    align-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+
+    svg {
+        margin-right: .3em;
+    }
+}
+
+.logo {
+    @extend .text-muted;
+    font-family: $font-logo;
 }
 
 @include media-breakpoint-down(sm) {
@@ -38,9 +42,22 @@ section {
 }
 
 .post-cover {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
     height: 100%;
-    max-height: 400px;
-    object-fit: cover;
+    width: 100%;
+
+    @include media-breakpoint-up(md) {
+        &-lg {
+            height: 380px;
+        }
+    }
+
+    @include media-breakpoint-down(sm) {
+        height: 200px;
+    }
 }
 
 .img-circle {

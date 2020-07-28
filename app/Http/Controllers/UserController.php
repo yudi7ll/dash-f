@@ -15,8 +15,10 @@ class UserController extends Controller
     public function profile(User $user)
     {
         $posts = $user->post()->latest()->paginate(8);
+        $userinfo = $user->userinfo;
 
         return view('user.profile')
-            ->nest('postcard', 'components.postcard', compact('posts'));
+            ->nest('postcard', 'components.postcard', compact('posts'))
+            ->nest('bio', 'components.userbio', compact('userinfo'));
     }
 }
