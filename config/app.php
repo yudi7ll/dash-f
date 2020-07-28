@@ -175,9 +175,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        // Laravel ide helper
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-
         // Intervention\Image
         Intervention\Image\ImageServiceProvider::class,
     ],
