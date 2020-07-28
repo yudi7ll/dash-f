@@ -5,7 +5,7 @@
             <div class="card-body">
                 <h5 class="card-title">
                     <h4 title="{{ $post['title'] }}">
-                        <a class="text-dark" href="{{ route('post.show', $post['slug']) }}">{{ $post['title'] }}</a>
+                        <a class="text-dark font-weight-bold" href="{{ route('post.show', $post['slug']) }}">{{ $post['title'] }}</a>
                     </h4>
                 </h5>
                 <p class="card-text" title="{{ $post['description'] }}">{{ $post['description'] }}</p>
@@ -30,7 +30,7 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <a class="text-dark" href="{{ route('post.show', $post['slug']) }}" title="{{ $post['title'] }}">{{ $post['title'] }}</a>
+                            <a class="text-dark font-weight-bold" href="{{ route('post.show', $post['slug']) }}" title="{{ $post['title'] }}">{{ $post['title'] }}</a>
                         </h5>
                         <p class="card-text" title="{{ $post['description'] }}">{{ $post['description'] }}</p>
                         <small class="card-text">
