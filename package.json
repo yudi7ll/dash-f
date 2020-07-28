@@ -17,6 +17,7 @@
         "jquery": "^3.2",
         "laravel-mix": "^5.0.1",
         "popper.js": "^1.12",
+        "postinstall": "npm run prod",
         "resolve-url-loader": "^3.1.0",
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0",
