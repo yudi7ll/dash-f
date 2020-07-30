@@ -1,7 +1,7 @@
 {
     "name": "DashF",
     "type": "project",
-    "description": "DashF Community",
+    "description": "Open Source Community",
     "keywords": [
         "dashf",
         "laravel",
@@ -20,13 +20,16 @@
         "watch": "npm run development -- --watch",
         "watch-poll": "npm run watch -- --watch-poll",
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "postinstall": "npm run prod",
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "bootstrap": "^4.0.0",
         "browser-sync": "^2.26.12",
-        "browser-sync-webpack-plugin": "^2.0.1",
+        "browser-sync-webpack-plugin": "^2.0.1"
+    },
+    "dependencies": {
+        "bootstrap": "^4.0.0",
         "cross-env": "^7.0",
         "highlight.js": "^10.1.2",
         "jquery": "^3.2",
