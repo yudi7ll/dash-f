@@ -12,6 +12,7 @@ class UserInfo extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'bio',
         'twitter',
         'github',
