@@ -12,7 +12,11 @@
     <div class="col-sm-9">
         <div class="d-flex align-items-center justify-content-center justify-content-sm-start my-2 my-sm-0">
             <h1 class="font-weight-bold mb-0">{{ $userinfo->user->name }}</h1>
-            <button class="btn btn-outline-primary btn-sm ml-2" type="button">Follow</button>
+            @can('update', $userinfo->user)
+                <a class="btn btn-outline-secondary btn-sm ml-2" href="{{ route('profile.edit', $userinfo->user->username) }}">Edit Profile</a>
+            @else
+                <button class="btn btn-outline-primary btn-sm ml-2" type="button">Follow</button>
+            @endcan
         </div>
         <div class="userinfo-connection mb-3 text-center text-sm-left">
             <a class="mr-2 text-secondary" href="#"><strong>156k</strong> Followers</a>

@@ -28,3 +28,4 @@ Route::resource('comment', 'CommentController');
 
 // users
 Route::get('/{user:username}', 'UserController@profile')->name('profile');
+Route::get('{user:username}/edit', 'UserController@edit')->name('profile.edit');
