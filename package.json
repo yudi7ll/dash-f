@@ -1,5 +1,19 @@
 {
+    "name": "DashF",
+    "type": "project",
+    "description": "DashF Community",
+    "keywords": [
+        "dashf",
+        "laravel",
+        "community"
+    ],
+    "license": "MIT",
     "private": true,
+    "version": "0.0.1",
+    "engines": {
+        "node": "12.x",
+        "npm": "6.x"
+    },
     "scripts": {
         "dev": "npm run development",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
@@ -14,17 +28,15 @@
         "browser-sync": "^2.26.12",
         "browser-sync-webpack-plugin": "^2.0.1",
         "cross-env": "^7.0",
+        "highlight.js": "^10.1.2",
         "jquery": "^3.2",
         "laravel-mix": "^5.0.1",
         "popper.js": "^1.12",
         "resolve-url-loader": "^3.1.0",
+        "selectize": "^0.12.6",
+        "simplemde": "^1.11.2",
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0",
         "vue-template-compiler": "^2.6.11"
-    },
-    "dependencies": {
-        "highlight.js": "^10.1.2",
-        "selectize": "^0.12.6",
-        "simplemde": "^1.11.2"
     }
 }
