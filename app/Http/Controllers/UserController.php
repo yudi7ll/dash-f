@@ -9,7 +9,7 @@ class UserController extends Controller
     /**
      * Display the user profile
      *
-     * @param \App\User
+     * @param \App\User $user
      * @return \Illuminate\Support\Facades\View
      */
     public function profile(User $user)
@@ -25,11 +25,12 @@ class UserController extends Controller
     /**
      * Edit the user profile
      *
-     * @param \App\User
+     * @param \App\User $user
      * @return \Illuminate\Support\Facades\View
      */
     public function edit(User $user)
     {
-        dd($user);
+        $this->authorize('update', $user);
+        return $user;
     }
 }

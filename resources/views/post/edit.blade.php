@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <link rel="stylesheet" href="{{ asset('css/create-form.css') }}">
+    <link rel="preload" href="{{ asset('css/create-form.css') }}" as="style">
+    <link rel="preload" href="{{ asset('js/create-form.js') }}" as="script">
+
+    <link defer rel="stylesheet" href="{{ asset('css/create-form.css') }}">
     <script defer src="{{ asset('js/create-form.js') }}"></script>
 
     <div class="container py-4">
