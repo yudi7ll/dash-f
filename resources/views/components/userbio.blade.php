@@ -26,12 +26,17 @@
             <p>{{ $userinfo->bio }}</p>
         </div>
         <div class="userinfo-work_as">
-            <div class="text-muted">Work as : </div>
-            <h6>
-                <strong>{{ $userinfo->work_as }}</strong>
-                <span> at </span>
-                <strong>{{ $userinfo->work_at }}</strong>
-            </h6>
+            @isset($userinfo->work_as)
+                <div class="text-muted">Work as : </div>
+                <h6>
+                    <strong>{{ $userinfo->work_as }}</strong>
+
+                    @isset($userinfo->work_at)
+                        <span> at </span>
+                        <strong>{{ $userinfo->work_at }}</strong>
+                    @endisset
+                </h6>
+            @endisset
         </div>
         <div class="userinfo-birth">
             <div class="text-muted">Born : </div>

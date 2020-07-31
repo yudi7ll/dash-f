@@ -1,6 +1,6 @@
-const jQuery = require('jquery');
-const SimpleMDE = require('simplemde');
-require('selectize');
+import jQuery from 'jquery';
+import SimpleMDE from 'simplemde';
+import 'selectize';
 
 jQuery('#tags-input').selectize({
     delimiter: ',',

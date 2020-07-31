@@ -5,22 +5,22 @@ const CONFIG = {
     }
 }
 const BASEURL = document.location.origin;
+const SITEURL = BASEURL + "/api/post?page=";
 
 let page = 2;
 let isLoading = false;
-const SITEURL = BASEURL + "/api/post?page=";
-const loading = $('#loading');
-const noData = $('#no-data');
+const loading = document.getElementById('loading');
+const noData = document.getElementById('no-data');
 
-$(window).scroll(() => {
-    if($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+window.addEventListener('scroll', () => {
+    if (document.body.scrollHeight - window.scrollY <= 700) {
         load_more();
     }
 });
 
 async function load_more() {
-    noData.hide();
-    loading.show();
+    noData.style.display = 'none';
+    loading.style.display = 'block';
 
     if (!isLoading) {
         isLoading = true;
@@ -30,16 +30,16 @@ async function load_more() {
             res = await res.text();
 
             if (!res) {
-                noData.show();
+                noData.style.display = 'block';
                 return;
             }
 
-            $('#postcard').append(res);
+            document.getElementById('postcard').innerHTML += res;
             page++;
         } catch(e) {
-            noData.show();
+            noData.style.display = 'block';
         } finally {
-            loading.hide();
+            loading.style.display = 'none';
             isLoading = false;
         }
     }

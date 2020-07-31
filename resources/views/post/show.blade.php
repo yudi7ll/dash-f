@@ -1,18 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <link rel="stylesheet" href="{{ asset('css/highlight.css') }}">
-    <script src="{{ asset('js/highlight.js') }}"></script>
-
     <style type="text/css" media="screen">
-        .hljs {
-            padding: 1rem;
-        }
+        .hljs { padding: 1rem; }
     </style>
 
     <div class="container-sm">
         <div class="row">
-            <article class="col col-md-8 py-3">
+            <article class="col col-lg-8 py-3">
                 <section>
                     @if (!$post['published'])
                         <div class="alert alert-danger" role="alert">
@@ -20,8 +15,8 @@
                             <span>{{ __('Only you can see & edit this post') }}</span>
                         </div>
                     @endif
-                    <h2> {{ $post['title'] }} </h2>
-                    <h5 class="font-weight-normal">{{ $post['description'] }}</h5>
+                    <h1 class="font-weight-bold"> {{ $post['title'] }} </h1>
+                    <h4>{{ $post['description'] }}</h4>
                     <div class="mb-2">
                         <small>
                             <a class="text-dark font-weight-bold" href="{{ route('profile', $post['user']['username']) }}">{{ $post['user']['name'] }}</a>
@@ -33,9 +28,9 @@
 
                     </div>
 
-                    <img class="w-100 d-block" src="{{ $post['cover'] }}" alt="{{ $post['title'] }}" />
+                    <img class="w-100 d-block article-cover" src="{{ $post['cover'] }}" alt="{{ $post['title'] }}" />
 
-                    <div class="my-3">
+                    <div class="my-3 article-content">
                         <div class="tags mb-3">
                             @foreach ($post->tagged as $tag)
                                 <a href="{{ route('tags.post', $tag->tag_slug) }}">#{{ $tag->tag_name }}</a>
@@ -105,4 +100,18 @@
             </article>
         </div>
     </div>
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+    <link defer rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/pojoaque.min.css">
+
+    <script>
+        // add attribute loading=lazy to img
+        window.addEventListener('load', function () {
+            document.querySelectorAll('img')
+                .forEach(e => e.setAttribute('loading', 'lazy'));
+        });
+
+        hljs.initHighlightingOnLoad();
+    </script>
 @endsection

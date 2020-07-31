@@ -4,23 +4,15 @@
 // Variables
 @import 'variables';
 
-html {
-    @extend .bg-light;
-}
-
-body {
-    font-family: $font-family-sans-serif;
-}
+html { background-color: #f8f9fa; }
+body { font-family: $font-family-sans-serif; }
+img { max-width: 100%; }
 
 section {
-    @extend .bg-white;
-    @extend .rounded;
-    @extend .border;
-    @extend .p-3;
-}
-
-img {
-    max-width: 100%;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 1rem;
 }
 
 .with-svg {
@@ -28,9 +20,7 @@ img {
     display: flex;
     flex-wrap: nowrap;
 
-    svg {
-        margin-right: .3em;
-    }
+    svg { margin-right: .3em; }
 }
 
 .logo {
@@ -54,9 +44,7 @@ img {
     width: 100%;
 
     @include media-breakpoint-up(md) {
-        &-lg {
-            height: 380px;
-        }
+        &-lg { height: 380px; }
     }
 
     @include media-breakpoint-down(sm) {
@@ -64,10 +52,4 @@ img {
     }
 }
 
-.img-circle {
-    border-radius: 10rem;
-}
-
-input {
-    outline: none;
-}
+.img-circle { border-radius: 10rem; }

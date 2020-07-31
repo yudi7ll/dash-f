@@ -1,12 +1,12 @@
+<link rel="stylesheet" href="{{ asset('css/home.css') }}">
+<script defer src="{{ asset('js/home.js') }}"></script>
 @foreach ($posts->items() as $key => $post)
     <div class="card mb-1">
         @if ($posts->currentPage() === 1 && $key === 0)
             <a class="post-cover post-cover-lg" href="{{ route('post.show', $post['slug']) }}" style="background-image: url('{{ $post['cover'] }}');"></a>
             <div class="card-body">
                 <h5 class="card-title">
-                    <h4 title="{{ $post['title'] }}">
-                        <a class="text-dark font-weight-bold" href="{{ route('post.show', $post['slug']) }}">{{ $post['title'] }}</a>
-                    </h4>
+                    <a class="text-dark font-weight-bold" href="{{ route('post.show', $post['slug']) }}">{{ $post['title'] }}</a>
                 </h5>
                 <p class="card-text" title="{{ $post['description'] }}">{{ $post['description'] }}</p>
                 <small class="card-text">
@@ -25,7 +25,7 @@
         @else
             <div class="row no-gutters flex-md-row-reverse">
                 <div class="col-md-4 p-0 p-md-3">
-                    <a class="post-cover" href="{{ route('post.show', $post['slug']) }}" style="background-image: url('{{ $post['cover'] }}');"></a>
+                    <a class="post-cover" href="{{ route('post.show', $post['slug']) }}" style="background-image: url('{{ $post['cover'] }}')"></a>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">

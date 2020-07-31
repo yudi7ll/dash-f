@@ -2,10 +2,9 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/userinfo.css": "/css/userinfo.css",
+    "/css/home.css": "/css/home.css",
     "/js/create-form.js": "/js/create-form.js",
-    "/js/highlight.js": "/js/highlight.js",
+    "/js/home.js": "/js/home.js",
     "/js/infinite-scroll.js": "/js/infinite-scroll.js",
-    "/css/highlight.css": "/css/highlight.css",
-    "/css/pojoaque.jpg": "/css/pojoaque.jpg",
     "/css/create-form.css": "/css/create-form.css"
 }
