@@ -1,13 +1,11 @@
-{{-- <link rel="stylesheet" href="{{ asset('css/home.css') }}"> --}}
-{{-- <script defer src="{{ asset('js/home.js') }}"></script> --}}
 @foreach ($posts->items() as $key => $post)
     <div class="card mb-1">
         @if ($posts->currentPage() === 1 && $key === 0)
             <a class="post-cover post-cover-lg" href="{{ route('posts.show', $post['slug']) }}" style="background-image: url('{{ $post['cover'] }}');"></a>
             <div class="card-body">
-                <h4 class="card-title">
+                <h5 class="card-title">
                     <a class="text-dark font-weight-bold" href="{{ route('posts.show', $post['slug']) }}">{{ $post['title'] }}</a>
-                </h4>
+                </h5>
                 <p class="card-text" title="{{ $post['description'] }}">{{ $post['description'] }}</p>
                 <small class="card-text">
                     @foreach ($post->tagged as $tag)
@@ -30,9 +28,9 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h4 class="card-title">
+                        <h5 class="card-title">
                             <a class="text-dark font-weight-bold" href="{{ route('posts.show', $post['slug']) }}" title="{{ $post['title'] }}">{{ $post['title'] }}</a>
-                        </h4>
+                        </h5>
                         <p class="card-text" title="{{ $post['description'] }}">{{ $post['description'] }}</p>
                         <small class="card-text">
                             @foreach ($post->tagged as $tag)
