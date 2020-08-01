@@ -29,7 +29,7 @@ class CommentController extends Controller
         $comment->content = $request->content;
         $comment->saveOrFail();
 
-        return redirect()->back()->with('status', 'Comment posted successfully!');
+        return redirect()->back()->with('success', 'Comment posted successfully!');
     }
 
     /**
@@ -64,6 +64,6 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
         $comment->delete();
-        return redirect()->back()->with('status', 'Your comment deleted successfully!');
+        return redirect()->back()->with('success', 'Your comment deleted successfully!');
     }
 }

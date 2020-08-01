@@ -70,10 +70,10 @@ class UserController extends Controller
         $updated = $user->update($data);
 
         if (! $updated) {
-            return redirect()->back()->with('status', 'Something went wrong when updating your data, please try again!');
+            return redirect()->back()->with('error', 'Something went wrong when updating your data, please try again!');
         }
 
-        return redirect()->back()->with('status', 'Your data updated successfully!');
+        return redirect()->back()->with('success', 'Your data updated successfully!');
     }
 
     /**
@@ -90,7 +90,7 @@ class UserController extends Controller
 
         $user->userinfo->update($data);
 
-        return redirect()->back()->with('status', 'Your data updated successfully!');
+        return redirect()->back()->with('success', 'Your data updated successfully!');
     }
 
     /**
@@ -104,6 +104,6 @@ class UserController extends Controller
     {
         $user->update([ 'password' => Hash::make($request->new_password) ]);
 
-        return redirect()->back()->with('status', 'Your password updated successfully!');
+        return redirect()->back()->with('success', 'Your password updated successfully!');
     }
 }

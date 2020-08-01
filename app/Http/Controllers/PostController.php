@@ -66,7 +66,7 @@ class PostController extends Controller
 
         return redirect()
             ->route('post.show', $data->slug)
-            ->with('status', 'Article saved successfully!');
+            ->with('success', 'Article saved successfully!');
     }
 
     /**
@@ -83,7 +83,7 @@ class PostController extends Controller
                 return view('post.show', compact('post'));
             }
 
-            return redirect()->back()->with('status', 'You don\'t have permissions to do this action');
+            return redirect()->back()->with('error', 'You don\'t have permissions to do this action');
         }
 
         return view('post.show')->with('post', $post);
@@ -127,7 +127,7 @@ class PostController extends Controller
 
         return redirect()
             ->route('post.show', $post->slug)
-            ->with('status', 'Article updated successfully!');
+            ->with('success', 'Article updated successfully!');
     }
 
     /**
@@ -140,6 +140,6 @@ class PostController extends Controller
     {
         Storage::delete($post->path . $post->body);
         $post->delete();
-        return redirect('/')->with('status', 'Article deleted successfully!');
+        return redirect('/')->with('success', 'Article deleted successfully!');
     }
 }
