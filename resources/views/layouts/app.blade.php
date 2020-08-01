@@ -10,11 +10,14 @@
         <title>{{ config('app.name', 'DashF') }}</title>
 
         <!-- Fonts -->
-        <link defer href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-        <link defer href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+        <link async href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <link async href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+        <link href="{{ asset('css/app.css') }}" rel="preload" as="style">
+        <link rel="preload" href="{{ asset('js/app.js') }}" as="script">
 
         <!-- Styles -->
-        <link defer href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>

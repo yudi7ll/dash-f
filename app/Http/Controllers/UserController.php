@@ -7,7 +7,6 @@ use App\Http\Requests\UserSecurityRequest;
 use App\User;
 use App\UserInfo;
 use Hash;
-use Request;
 use Validator;
 use View;
 
