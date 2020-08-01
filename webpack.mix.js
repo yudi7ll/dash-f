@@ -18,12 +18,12 @@ mix
     // custom
     .js('resources/js/infinite-scroll', 'public/js')
 
-    // create-form
+    // post-form
     .styles([
         'node_modules/simplemde/dist/simplemde.min.css',
         'node_modules/selectize/dist/css/selectize.bootstrap3.css',
-    ], 'public/css/create-form.css')
-    .js('resources/js/create-form', 'public/js')
+    ], 'public/css/post-form.css')
+    .js('resources/js/post-form', 'public/js')
 
     /**
      * @Pages

@@ -1,8 +1,9 @@
-import jQuery from 'jquery';
-import SimpleMDE from 'simplemde';
+import $ from 'jquery';
 import 'selectize';
+import SimpleMDE from 'simplemde';
 
-jQuery('#tags-input').selectize({
+
+$('#tags-input').selectize({
     delimiter: ',',
     persist: false,
     create: function(input) {

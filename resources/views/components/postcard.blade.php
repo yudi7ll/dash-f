@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="{{ asset('css/home.css') }}">
-<script defer src="{{ asset('js/home.js') }}"></script>
+{{-- <link rel="stylesheet" href="{{ asset('css/home.css') }}"> --}}
+{{-- <script defer src="{{ asset('js/home.js') }}"></script> --}}
 @foreach ($posts->items() as $key => $post)
     <div class="card mb-1">
         @if ($posts->currentPage() === 1 && $key === 0)

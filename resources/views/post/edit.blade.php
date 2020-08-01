@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <link rel="preload" href="{{ asset('css/create-form.css') }}" as="style">
-    <link rel="preload" href="{{ asset('js/create-form.js') }}" as="script">
+    <link rel="preload" href="{{ asset('css/post-form.css') }}" as="style">
+    <link rel="preload" href="{{ asset('js/post-form.js') }}" as="script">
 
-    <link rel="stylesheet" href="{{ asset('css/create-form.css') }}">
-    <script defer src="{{ asset('js/create-form.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/post-form.css') }}">
+    <script defer src="{{ asset('js/post-form.js') }}"></script>
 
     <div class="container py-4">
         @foreach ($errors->all() as $error)

@@ -1,1 +1,1 @@
-require('./_bootstrap');
+import 'bootstrap';
