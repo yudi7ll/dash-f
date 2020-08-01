@@ -13,7 +13,7 @@
         <div class="d-flex align-items-center justify-content-center justify-content-sm-start my-2 my-sm-0">
             <h1 class="font-weight-bold mb-0">{{ $user->name }}</h1>
             @can('update', $user)
-                <a class="btn btn-outline-secondary btn-sm ml-2" href="{{ route('user.edit', $user->username) }}">Edit Profile</a>
+                <a class="btn btn-outline-secondary btn-sm ml-2" href="{{ route('user.edit', [$user->username, 'profile']) }}">Edit Profile</a>
             @else
                 <button class="btn btn-outline-primary btn-sm ml-2" type="button">Follow</button>
             @endcan

@@ -28,9 +28,10 @@ mix
     /**
      * @Pages
      */
-    // userinfo
+    // userinfo page
     .sass('resources/sass/pages/userinfo.scss', 'public/css')
     // home page
-    .sass('resources/sass/pages/home.scss', 'public/css')
     .js('resources/js/home', 'public/js')
+    // user page
+    .sass('resources/sass/pages/user-edit.scss', 'public/css')
     .browserSync('0.0.0.0');

@@ -16,18 +16,20 @@ Auth::routes();
 Route::get('/', 'PostController@index')->name('home');
 
 // posts
-Route::resource('posts', 'PostController');
+Route::resource('/posts', 'PostController');
 
 // tags
-Route::get('tags', 'TagController@index')->name('tags');
-Route::get('tags/{tag}', 'TagController@posts')->name('tags.post');
+Route::get('/tags', 'TagController@index')->name('tags');
+Route::get('/tags/{tag}', 'TagController@posts')->name('tags.post');
 
 // comments
-Route::resource('comments', 'CommentController');
+Route::resource('/comments', 'CommentController');
 
-// users
-Route::get('{user:username}', 'UserController@profile')->name('user');
-Route::get('{user:username}/edit', 'UserController@edit')->name('user.edit');
-Route::put('{user:username}', 'UserController@update')->name('user.update');
+// user
+Route::get('/{user:username}', 'UserController@profile')->name('user');
+Route::redirect('/{user:username}/edit', '/{user:username}/edit/profile');
+Route::get('/{user:username}/edit/{page}', 'UserController@edit')->name('user.edit');
+Route::put('/{user:username}', 'UserController@updateAccount')->name('user.update_account');
+
 // profile
-Route::put('profile/{user:username}', 'UserController@update_userinfo')->name('profile.update');
+Route::put('/profile/{user:username}', 'UserController@updateProfile')->name('user.update_profile');

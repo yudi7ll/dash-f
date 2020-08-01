@@ -1,10 +1,3 @@
-const CONFIG = {
-    headers: {
-        'Content-Type': 'text/html',
-        'X-Requested-With': 'XMLHttpRequest'
-    }
-}
-const BASEURL = document.location.origin;
 const SITEURL = BASEURL + "/api/posts?page=";
 
 let page = 2;

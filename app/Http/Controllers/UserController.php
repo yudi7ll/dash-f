@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserInfoRequest;
 use App\Http\Requests\UserRequest;
 use App\User;
+use Request;
+use Validator;
+use View;
 
 class UserController extends Controller
 {
@@ -27,31 +30,50 @@ class UserController extends Controller
      * Edit the user profile
      *
      * @param \App\Http\Requests\UserRequest $request
-     * @return \Illuminate\Support\Facades\View
+     * @param string $page
+     * @return mixed
      */
-    public function edit(User $user)
+    public function edit(User $user, $page)
     {
         $this->authorize('update', $user);
+        $user = auth()->user();
+        $view = "components.form.{$page}";
 
-        return view('user.edit', $user);
+        // if the view file doesn't exists
+        if (! View::exists($view)) {
+            return redirect("{$user->username}/edit/profile");
+        }
+
+        return view('user.edit', $user)
+            ->nest('form', $view, compact('user'));
     }
 
     /**
-     * Update data user profile
+     * Update data account of specified user
      *
      * @param \App\User $user
      * @param \App\Http\Requests\UserRequest $request
      * @return \Illuminate\Support\Facades\Redirect
      */
-    public function update(User $user, UserRequest $request)
+    public function updateAccount(User $user)
     {
-        $user->name = $request->name;
-        $user->username = $request->username;
-        $user->email = $request->email;
-        $user->cover = $request->cover;
-        $user->saveOrFail();
+        $data = request()->all();
+        Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:100', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        ]);
 
-        $this->updateUserinfo(request());
+        $user->name = $data['name'];
+        $user->username = $data['username'];
+        $user->email = $data['email'];
+        $updated = $user->saveOrFail();
+
+        if (!$updated) {
+            return redirect()->back()->with('status', 'Something went wrong when updating your data, please try again!');
+        }
+
+        return redirect()->back()->with('status', 'Your data updated successfully!');
     }
 
     /**
