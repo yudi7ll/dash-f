@@ -5,9 +5,9 @@
         @if ($posts->currentPage() === 1 && $key === 0)
             <a class="post-cover post-cover-lg" href="{{ route('posts.show', $post['slug']) }}" style="background-image: url('{{ $post['cover'] }}');"></a>
             <div class="card-body">
-                <h5 class="card-title">
+                <h4 class="card-title">
                     <a class="text-dark font-weight-bold" href="{{ route('posts.show', $post['slug']) }}">{{ $post['title'] }}</a>
-                </h5>
+                </h4>
                 <p class="card-text" title="{{ $post['description'] }}">{{ $post['description'] }}</p>
                 <small class="card-text">
                     @foreach ($post->tagged as $tag)
@@ -15,9 +15,10 @@
                     @endforeach
                 </small>
                 <p class="card-text">
-                <small>
-                    <a class="text-dark" href="{{ route('user', $post['user']['username']) }}">{{ $post['user']['name'] }}</a>
-                </small>
+                <a href="{{ route('user', $post->user->username) }}">
+                    <img class="mr-2 img-circle" src="{{ route('cover.thumb', $post->user->cover) }}" alt="{{ $post->user->name }}" />
+                </a>
+                <a class="text-dark" href="{{ route('user', $post['user']['username']) }}">{{ $post['user']['name'] }}</a>
                 <span> . </span>
                 <small class="text-muted">{{ \Carbon\Carbon::parse($post['updated_at'])->diffForHumans() }}</small>
                 </p>
@@ -29,9 +30,9 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h4 class="card-title">
                             <a class="text-dark font-weight-bold" href="{{ route('posts.show', $post['slug']) }}" title="{{ $post['title'] }}">{{ $post['title'] }}</a>
-                        </h5>
+                        </h4>
                         <p class="card-text" title="{{ $post['description'] }}">{{ $post['description'] }}</p>
                         <small class="card-text">
                             @foreach ($post->tagged as $tag)
@@ -39,11 +40,12 @@
                             @endforeach
                         </small>
                         <p class="card-text">
-                        <small>
+                            <a href="{{ route('user', $post->user->username) }}">
+                                <img class="mr-2 img-circle" src="{{ route('cover.thumb', $post->user->cover) }}" alt="{{ $post->user->name }}" />
+                            </a>
                             <a class="text-dark" href="{{ route('user', $post['user']['username']) }}">{{ $post['user']['name'] }}</a>
-                        </small>
-                        <span> . </span>
-                        <small class="text-muted">{{ \Carbon\Carbon::parse($post['updated_at'])->diffForHumans() }}</small>
+                            <span> . </span>
+                            <small class="text-muted">{{ \Carbon\Carbon::parse($post['updated_at'])->diffForHumans() }}</small>
                         </p>
                     </div>
                 </div>
