@@ -8,33 +8,60 @@
     <script defer src="{{ asset('js/post-form.js') }}"></script>
 
     <div class="container py-4">
-        @foreach ($errors->all() as $error)
-            <div class="alert alert-danger" role="alert">
-                {{ $error }}
-            </div>
-        @endforeach
         <div class="row">
             <div class="col-md-8">
                 <form class="bg-white p-4 border" method="post" action="{{ route('posts.store') }}">
                     @csrf
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}">
+                        <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" value="{{ old('title') }}">
+
+                        @error('title')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <input type="text" class="form-control" name="description" id="description" value="{{ old('description') }}">
+                        <input type="text" class="form-control @error('description') is-invalid @enderror" name="description" id="description" value="{{ old('description') }}">
+
+                        @error('description')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="cover">Tags</label>
-                        <input type="text" name="tags" id="tags-input" value="{{ old('tags') }}">
+                        <input class="@error('tags') is-invalid @enderror" type="text" name="tags" id="tags-input" value="{{ old('tags') }}">
+
+                        @error('tags')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="cover">Cover Image Url</label>
-                        <input type="text" class="form-control" name="cover" id="cover" placeholder="https://image_url_example.com" value="{{ old('cover') }}">
+                        <input type="text" class="form-control @error('cover') is-invalid @enderror" name="cover" id="cover" placeholder="https://image_url_example.com" value="{{ old('cover') }}">
+
+                        @error('cover')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div>
-                        <textarea id="body" name="body" rows="20">{{ old('body') ?: '# Hello World' }}</textarea>
+                        @error ('body')
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ $message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @enderror
+                        <textarea id="body" name="body" rows="20" required>{{ old('body') ?: '# Hello World' }}</textarea>
                     </div>
                     <div class="form-group form-check">
                         <input type="checkbox" name="published" class="form-check-input" id="published">

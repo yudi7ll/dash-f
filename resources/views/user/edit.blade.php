@@ -2,28 +2,24 @@
 
 @section('content')
     <link defer rel="stylesheet" href="{{ asset('css/user-edit.css') }}">
-    {{-- <script defer src="{{ asset('js/user-edit.js') }}"></script> --}}
+    <script defer src="{{ asset('js/user-edit.js') }}"></script>
 
     <div class="container py-4">
         <div class="row">
-            <div id="navigation" class="col-lg-4">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <a class="text-dark d-block" href="{{ route('user.edit', [auth()->user()->username, 'profile']) }}">Profile</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="text-dark d-block" href="{{ route('user.edit', [auth()->user()->username, 'account']) }}">Account</a>
-                    </li>
-                    <li class="list-group-item">
-                        <form action="{{ route('logout') }}" method="post">
-                            @csrf
-                            <button class="btn btn-link text-danger p-0 shadow-none d-block" type="submit">Logout</button>
-                        </form>
-                    </li>
-                </ul>
+            <div class="col-lg-4">
+                <form id="navigation" class="list-group" action="{{ route('logout') }}" method="post">
+                    @csrf
+
+                    <a id="profile" class="list-group-item list-group-item-action" href="{{ route('user.edit', [auth()->user()->username, 'profile']) }}">Profile</a>
+                    <a id="account" class="list-group-item list-group-item-action" href="{{ route('user.edit', [auth()->user()->username, 'account']) }}">Account</a>
+
+                    <button class="list-group-item list-group-item-action text-danger" type="submit">Logout</button>
+                </form>
             </div>
             <section class="col-lg-8">
-                {!! $form !!}
+                <div class="mt-3">
+                    {!! $form !!}
+                </div>
             </section>
         </div>
     </div>

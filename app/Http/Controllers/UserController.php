@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserInfoRequest;
-use App\Http\Requests\UserRequest;
 use App\User;
-use Request;
+use App\UserInfo;
 use Validator;
 use View;
 
@@ -49,7 +48,7 @@ class UserController extends Controller
     }
 
     /**
-     * Update data account of specified user
+     * Update data account of current user
      *
      * @param \App\User $user
      * @param \App\Http\Requests\UserRequest $request
@@ -61,15 +60,13 @@ class UserController extends Controller
         Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:100', 'unique:users'],
+            'cover' => ['image', 'nullable'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ]);
 
-        $user->name = $data['name'];
-        $user->username = $data['username'];
-        $user->email = $data['email'];
-        $updated = $user->saveOrFail();
+        $updated = $user->update($data);
 
-        if (!$updated) {
+        if (! $updated) {
             return redirect()->back()->with('status', 'Something went wrong when updating your data, please try again!');
         }
 
@@ -79,11 +76,17 @@ class UserController extends Controller
     /**
      * Update the UserInfo of current user
      *
+     * @param \App\User $user
      * @param \App\Http\Requests\UserRequest $request
      * @return \Illuminate\Support\Facades\Redirect
      */
-    public function update_userinfo(UserInfoRequest $request)
+    public function updateProfile(User $user, UserInfoRequest $request)
     {
-        return $request;
+        $data = $request->except(['_token', '_method']);
+        $data['user_id'] = $user->id;
+
+        $user->userinfo->update($data);
+
+        return redirect()->back()->with('status', 'Your data updated successfully!');
     }
 }

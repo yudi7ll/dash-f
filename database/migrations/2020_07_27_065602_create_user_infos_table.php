@@ -14,7 +14,8 @@ class CreateUserInfosTable extends Migration
     public function up()
     {
         Schema::create('user_infos', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->unique()->index()->primary();
+            $table->id();
+            $table->unsignedBigInteger('user_id')->unique()->index();
             $table->string('bio')->nullable();
             $table->string('twitter')->nullable();
             $table->string('github')->nullable();
