@@ -1,6 +1,6 @@
 <form id="profileForm" method="post" action="{{ route('user.update_profile', $user) }}">
     @csrf
-    @method('put')
+    @method('PUT')
 
     <div class="form-label-group">
         <input type="text" name="bio" value="{{ old('bio') ?: $user->userinfo->bio }}" id="inputBio" placeholder="Tell about yourself." class="form-control @error('bio') is-invalid @enderror">

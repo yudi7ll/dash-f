@@ -30,8 +30,6 @@ mix
      */
     // userinfo page
     .sass('resources/sass/pages/userinfo.scss', 'public/css')
-    // home page
-    .js('resources/js/home', 'public/js')
     // user page
     .sass('resources/sass/pages/user-edit.scss', 'public/css')
     .js('resources/js/user-edit', 'public/js')

@@ -1,6 +1,6 @@
 <form method="post" action="{{ route('user.update_account', $user) }}">
     @csrf
-    @method('put')
+    @method('PUT')
     <div class="form-label-group">
         <input type="text" name="name" value="{{ old('name') ?: $user->name }}" id="inputName" class="form-control @error('name') is-invalid @enderror" placeholder="Name" required>
         <label for="inputName">Name</label>

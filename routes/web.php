@@ -29,7 +29,11 @@ Route::resource('/comments', 'CommentController');
 Route::get('/{user:username}', 'UserController@profile')->name('user');
 Route::redirect('/{user:username}/edit', '/{user:username}/edit/profile');
 Route::get('/{user:username}/edit/{page}', 'UserController@edit')->name('user.edit');
-Route::put('/{user:username}', 'UserController@updateAccount')->name('user.update_account');
 
-// profile
+// @Update
+// Account
+Route::put('/{user:username}', 'UserController@updateAccount')->name('user.update_account');
+// Profile
 Route::put('/profile/{user:username}', 'UserController@updateProfile')->name('user.update_profile');
+// Security
+Route::put('/security/{user:username}', 'UserController@updateSecurity')->name('user.update_security');

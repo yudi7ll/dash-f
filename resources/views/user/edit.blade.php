@@ -12,6 +12,7 @@
 
                     <a id="profile" class="list-group-item list-group-item-action" href="{{ route('user.edit', [auth()->user()->username, 'profile']) }}">Profile</a>
                     <a id="account" class="list-group-item list-group-item-action" href="{{ route('user.edit', [auth()->user()->username, 'account']) }}">Account</a>
+                    <a id="security" class="list-group-item list-group-item-action" href="{{ route('user.edit', [auth()->user()->username, 'security']) }}">Security</a>
 
                     <button class="list-group-item list-group-item-action text-danger" type="submit">Logout</button>
                 </form>

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserInfoRequest;
+use App\Http\Requests\UserSecurityRequest;
 use App\User;
 use App\UserInfo;
+use Hash;
+use Request;
 use Validator;
 use View;
 
@@ -88,5 +91,19 @@ class UserController extends Controller
         $user->userinfo->update($data);
 
         return redirect()->back()->with('status', 'Your data updated successfully!');
+    }
+
+    /**
+     * Update the password of curent user
+     *
+     * @param \App\User $user
+     * @param \App\Http\Requests\UserSecurityRequest $request
+     * @return \Illuminate\Support\Facades\Redirect;
+     */
+    public function updateSecurity(User $user, UserSecurityRequest $request)
+    {
+        $user->update([ 'password' => Hash::make($request->new_password) ]);
+
+        return redirect()->back()->with('status', 'Your password updated successfully!');
     }
 }
