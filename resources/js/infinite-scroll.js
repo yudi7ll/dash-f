@@ -5,7 +5,7 @@ const CONFIG = {
     }
 }
 const BASEURL = document.location.origin;
-const SITEURL = BASEURL + "/api/post?page=";
+const SITEURL = BASEURL + "/api/posts?page=";
 
 let page = 2;
 let isLoading = false;

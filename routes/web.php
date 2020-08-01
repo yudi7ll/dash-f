@@ -16,16 +16,18 @@ Auth::routes();
 Route::get('/', 'PostController@index')->name('home');
 
 // posts
-Route::get('/{user:id}/post', 'PostController@userPost')->name('user.post');
-Route::resource('post', 'PostController');
+Route::resource('posts', 'PostController');
 
 // tags
 Route::get('tags', 'TagController@index')->name('tags');
-Route::get('tags/{tag}', 'TagController@post')->name('tags.post');
+Route::get('tags/{tag}', 'TagController@posts')->name('tags.post');
 
 // comments
-Route::resource('comment', 'CommentController');
+Route::resource('comments', 'CommentController');
 
 // users
-Route::get('/{user:username}', 'UserController@profile')->name('profile');
-Route::get('{user:username}/edit', 'UserController@edit')->name('profile.edit');
+Route::get('{user:username}', 'UserController@profile')->name('user');
+Route::get('{user:username}/edit', 'UserController@edit')->name('user.edit');
+Route::put('{user:username}', 'UserController@update')->name('user.update');
+// profile
+Route::put('profile/{user:username}', 'UserController@update_userinfo')->name('profile.update');

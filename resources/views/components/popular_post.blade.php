@@ -7,12 +7,12 @@
         @isset ($populars)
             @forelse ($populars as $popular)
                 <div class="px-3 py-2 list-group-item">
-                    <a class="text-dark d-inline-block text-break" href="{{ route('post.show', $popular['slug']) }}" title="{{ $popular['title'] }}">
+                    <a class="text-dark d-inline-block text-break" href="{{ route('posts.show', $popular['slug']) }}" title="{{ $popular['title'] }}">
                         {{ $popular['title'] }}
                     </a>
                     <div>
                         <small class="text-muted">
-                            <a class="text-dark" href="{{ route('profile', $popular['user']) }}">
+                            <a class="text-dark" href="{{ route('user', $popular['user']) }}">
                                 {{ $popular['user']['name'] }}
                             </a>
                             <span> . </span>

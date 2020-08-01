@@ -14,7 +14,7 @@ class TagController extends Controller
         return view('tags', compact('tags'));
     }
 
-    public function post($tag)
+    public function posts($tag)
     {
         $posts = Post::withAnyTag($tag)
             ->with('user')

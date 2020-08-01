@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\PostRequest;
 use App\Post;
 use Conner\Tagging\Model\Tag;
 use Illuminate\Support\Facades\Storage;
@@ -30,7 +30,7 @@ class PostController extends Controller
 
         return view('home')
             ->nest('postcard', 'components.postcard', compact('posts'))
-            ->nest('popular_post', 'components.popular-post', compact('populars'))
+            ->nest('popular_post', 'components.popular_post', compact('populars'))
             ->nest('tags', 'components.tagscard', compact('tags'));
     }
 
@@ -50,7 +50,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePostRequest $request)
+    public function store(PostRequest $request)
     {
         $data = new Post;
         $data->user_id = $request->user_id;
@@ -108,7 +108,7 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Support\Facades\Redirect
      */
-    public function update(StorePostRequest $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {
         $this->authorize('update', $post);
         // only update the slug if the title changed

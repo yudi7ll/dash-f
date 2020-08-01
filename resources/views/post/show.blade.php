@@ -19,11 +19,11 @@
                     <h4>{{ $post['description'] }}</h4>
                     <div class="mb-2">
                         <small>
-                            <a class="text-dark font-weight-bold" href="{{ route('profile', $post['user']['username']) }}">{{ $post['user']['name'] }}</a>
+                            <a class="text-dark font-weight-bold" href="{{ route('user', $post['user']['username']) }}">{{ $post['user']['name'] }}</a>
                         </small>
                         <small>{{ $post['created_at']->diffForHumans() }}</small>
                         @can('update', $post)
-                            <a class="ml-2" href="{{ route('post.edit', $post['slug']) }}">{{ __('Edit') }}</a>
+                            <a class="ml-2" href="{{ route('posts.edit', $post['slug']) }}">{{ __('Edit') }}</a>
                         @endcan
 
                     </div>
@@ -41,7 +41,7 @@
                 </section>
                 <section class="comments mt-2">
                     <h5>Comments</h5>
-                    <form method="post" action="{{ route('comment.store') }}">
+                    <form method="post" action="{{ route('comments.store') }}">
                         @csrf
                         <div class="form-group">
                             <input type="hidden" value="{{ $post['id'] }}" name="post_id" id="post_id" />
@@ -53,14 +53,14 @@
                         <button type="submit" class="btn btn-primary d-block ml-auto" @guest disabled @endguest>Send</button>
                     </form>
                     <div class="mt-3">
-                        @foreach ($post['comment']->reverse() as $comment)
+                        @foreach ($post['comments']->reverse() as $comment)
                             <div class="media py-3 border-bottom">
-                                <a href="{{ route('profile', $comment->user->username) }}">
+                                <a href="{{ route('user', $comment->user->username) }}">
                                     <img class="mr-3 img-circle" src="{{ route('cover.thumb', $comment->user->cover) }}" alt="{{ $comment->user->name }}" />
                                 </a>
                                 <div class="media-body">
                                     <h6 class="mt-0">
-                                        <a class="text-dark" href="{{ route('profile', $comment->user->username) }}">{{ $comment->user->username }}</a>
+                                        <a class="text-dark font-weight-bold" href="{{ route('user', $comment->user->username) }}">{{ $comment->user->username }}</a>
                                     </h6>
                                     <small>{{ $comment->created_at->diffForHumans() }}</small>
                                     @if ($comment->created_at != $comment->updated_at)
@@ -82,7 +82,7 @@
                                     </div>
                                 </div>
 
-                                <form id="delete-comment-form" action="{{ route('comment.destroy', $comment->id) }}" method="post">
+                                <form id="delete-comment-form" action="{{ route('comments.destroy', $comment->id) }}" method="post">
                                     @csrf
                                     @method('delete')
                                 </form>

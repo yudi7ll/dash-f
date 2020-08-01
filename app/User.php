@@ -50,12 +50,12 @@ class User extends Authenticatable
         return $this->hasOne('App\UserInfo');
     }
 
-    public function post()
+    public function posts()
     {
         return $this->hasMany('App\Post');
     }
 
-    public function comment()
+    public function comments()
     {
         return $this->hasMany('App\Comment');
     }

@@ -15,7 +15,7 @@
         @endforeach
         <div class="row">
             <div class="col-md-8">
-                <form class="bg-white p-4 border" method="post" action="{{ route('post.store') }}">
+                <form class="bg-white p-4 border" method="post" action="{{ route('posts.store') }}">
                     @csrf
                     <div class="form-group">
                         <label for="title">Title</label>

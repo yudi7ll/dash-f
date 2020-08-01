@@ -12,9 +12,7 @@
 */
 
 Route::namespace('Api')->group(function () {
-    Route::get('post', 'PostController@index');
-    Route::get('populars', 'PostController@populars');
-    Route::get('tagscard', 'TagController@index');
+    Route::get('posts', 'PostController@index');
 
     // images
     Route::get('cover/{cover}', 'ImageController@getCoverImage')->name('cover');

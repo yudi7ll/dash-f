@@ -15,7 +15,7 @@
         @endforeach
         <div class="row">
             <div class="col-md-8">
-                <form class="bg-white p-4 border" method="post" action="{{ route('post.update', $post['slug']) }}">
+                <form class="bg-white p-4 border" method="post" action="{{ route('posts.update', $post['slug']) }}">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
@@ -51,7 +51,7 @@
         <div class="col-md-4">
         </div>
 
-        <form id="destroy-form" action="{{ route('post.destroy', $post['slug']) }}" method="POST">
+        <form id="destroy-form" action="{{ route('posts.destroy', $post['slug']) }}" method="POST">
             @csrf
             @method('DELETE')
         </form>
