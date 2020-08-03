@@ -30,7 +30,7 @@ Route::get('/{user:username}', 'UserController@profile')->name('user');
 Route::redirect('/{user:username}/edit', '/{user:username}/edit/profile');
 Route::get('/{user:username}/edit/{page}', 'UserController@edit')->name('user.edit');
 
-// @Update
+// @UserUpdate
 // Account
 Route::put('/{user:username}', 'UserController@updateAccount')->name('user.update_account');
 // Profile

@@ -13,6 +13,7 @@ class PostController extends Controller
     {
         $this->middleware('auth:web')->except(['index', 'show']);
     }
+
     /**
      * Display a initial view with listing of the posts, popular posts & tags.
      *
@@ -41,7 +42,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('post.create');
+        return view('posts.create');
     }
 
     /**
@@ -65,7 +66,7 @@ class PostController extends Controller
         $data->tag(explode(',', $request->tags));
 
         return redirect()
-            ->route('post.show', $data->slug)
+            ->route('posts.show', $data->slug)
             ->with('success', 'Article saved successfully!');
     }
 
@@ -86,7 +87,7 @@ class PostController extends Controller
             return redirect()->back()->with('error', 'You don\'t have permissions to do this action');
         }
 
-        return view('post.show')->with('post', $post);
+        return view('posts.show')->with('post', $post);
     }
 
     /**
@@ -98,7 +99,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $this->authorize('update', $post);
-        return view('post.edit', compact('post'));
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -126,7 +127,7 @@ class PostController extends Controller
         $post->retag(explode(',', $request->tags));
 
         return redirect()
-            ->route('post.show', $post->slug)
+            ->route('posts.show', $post->slug)
             ->with('success', 'Article updated successfully!');
     }
 

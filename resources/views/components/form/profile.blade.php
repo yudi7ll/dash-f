@@ -32,6 +32,16 @@
             </span>
         @enderror
     </div>
+    <div class="form-label-group">
+        <input type="date" name="birth_date" value="{{ old('birth_date') ?: $user->userinfo->birth_date }}" id="inputBirthDate" class="form-control @error('birth_date') is-invalid @enderror" placeholder="Birth Date">
+        <label for="inputBirthDate">Birth Date</label>
+
+        @error('birth_date')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
 
     <h4>Links</h4>
     <div class="form-label-group">

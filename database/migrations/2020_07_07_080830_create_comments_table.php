@@ -17,7 +17,7 @@ class CreateCommentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('post_id');
-            $table->string('content');
+            $table->text('content');
             $table->integer('likes')->default(0);
             $table->timestamps();
 

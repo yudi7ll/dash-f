@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserInfoRequest;
 use App\Http\Requests\UserSecurityRequest;
 use App\User;
-use App\UserInfo;
 use Hash;
 use Validator;
 use View;
@@ -37,6 +36,7 @@ class UserController extends Controller
     public function edit(User $user, $page)
     {
         $this->authorize('update', $user);
+
         $user = auth()->user();
         $view = "components.form.{$page}";
 
@@ -58,7 +58,10 @@ class UserController extends Controller
      */
     public function updateAccount(User $user)
     {
+        $this->authorize('update', $user);
+
         $data = request()->all();
+
         Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:100', 'unique:users'],
@@ -66,9 +69,9 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ]);
 
-        $updated = $user->update($data);
+        $isUpdated = $user->update($data);
 
-        if (! $updated) {
+        if (! $isUpdated) {
             return redirect()->back()->with('error', 'Something went wrong when updating your data, please try again!');
         }
 
@@ -84,6 +87,8 @@ class UserController extends Controller
      */
     public function updateProfile(User $user, UserInfoRequest $request)
     {
+        $this->authorize('update', $user);
+
         $data = $request->except(['_token', '_method']);
         $data['user_id'] = $user->id;
 
@@ -101,6 +106,8 @@ class UserController extends Controller
      */
     public function updateSecurity(User $user, UserSecurityRequest $request)
     {
+        $this->authorize('update', $user);
+
         $user->update([ 'password' => Hash::make($request->new_password) ]);
 
         return redirect()->back()->with('success', 'Your password updated successfully!');

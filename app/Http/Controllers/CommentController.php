@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Http\Requests\CommentRequest;
-use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth:web');
@@ -33,26 +31,23 @@ class CommentController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Comment $comment)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(CommentRequest $request, Comment $comment)
     {
-        //
+        $this->authorize('update', $comment);
+
+        $isUpdated = $comment->update($request->all());
+
+        if (! $isUpdated) {
+            return redirect()->back()->with('error', 'Update comment failed, Please try again later!');
+        }
+
+        return redirect()->back()->with('success', 'Comment updated successfully');
     }
 
     /**

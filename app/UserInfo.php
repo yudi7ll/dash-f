@@ -22,6 +22,7 @@ class UserInfo extends Model
         'website',
         'work_as',
         'work_at',
+        'birth_date',
     ];
 
     /**

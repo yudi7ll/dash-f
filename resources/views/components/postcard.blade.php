@@ -7,18 +7,20 @@
                     <a class="text-dark font-weight-bold" href="{{ route('posts.show', $post['slug']) }}">{{ $post['title'] }}</a>
                 </h5>
                 <p class="card-text" title="{{ $post['description'] }}">{{ $post['description'] }}</p>
-                <small class="card-text">
-                    @foreach ($post->tagged as $tag)
-                        <a href="{{ route('tags.post', $tag->tag_slug) }}">#{{ $tag->tag_name }}</a>
-                    @endforeach
-                </small>
                 <p class="card-text">
-                <a href="{{ route('user', $post->user->username) }}">
-                    <img class="mr-2 img-circle" src="{{ route('cover.thumb', $post->user->cover) }}" alt="{{ $post->user->name }}" />
-                </a>
-                <a class="text-dark" href="{{ route('user', $post['user']['username']) }}">{{ $post['user']['name'] }}</a>
-                <span> . </span>
-                <small class="text-muted">{{ \Carbon\Carbon::parse($post['updated_at'])->diffForHumans() }}</small>
+                    <small>
+                        @foreach ($post->tagged as $tag)
+                            <a href="{{ route('tags.post', $tag->tag_slug) }}">#{{ $tag->tag_name }}</a>
+                        @endforeach
+                    </small>
+                </p>
+                <p class="card-text">
+                    <a href="{{ route('user', $post->user->username) }}">
+                        <img class="mr-2 img-circle" src="{{ route('cover.thumb', $post->user->cover) }}" alt="{{ $post->user->name }}" />
+                    </a>
+                    <a class="text-dark" href="{{ route('user', $post['user']['username']) }}">{{ $post['user']['name'] }}</a>
+                    <span> . </span>
+                    <small class="text-muted">{{ \Carbon\Carbon::parse($post['updated_at'])->diffForHumans() }}</small>
                 </p>
             </div>
         @else

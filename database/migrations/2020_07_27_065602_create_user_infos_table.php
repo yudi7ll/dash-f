@@ -25,7 +25,7 @@ class CreateUserInfosTable extends Migration
             $table->string('website')->nullable();
             $table->string('work_as')->nullable();
             $table->string('work_at')->nullable();
-            $table->timestamp('birth_date')->nullable();
+            $table->date('birth_date')->nullable();
 
             $table->foreign('user_id')
                   ->references('id')

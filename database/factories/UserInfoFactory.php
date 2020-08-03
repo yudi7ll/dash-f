@@ -28,6 +28,6 @@ $factory->define(UserInfo::class, function (Faker $faker) {
         'github' => 'https://github.com',
         'work_as' => 'Web Developer',
         'work_at' => 'Silicon Valley',
-        'birth_date' => $faker->dateTimeThisYear(),
+        'birth_date' => $faker->date(),
     ];
 });
