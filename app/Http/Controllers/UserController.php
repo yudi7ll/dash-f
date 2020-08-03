@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserInfoRequest;
+use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserSecurityRequest;
 use App\User;
 use Hash;
-use Validator;
 use View;
 
 class UserController extends Controller
@@ -37,7 +37,6 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
 
-        $user = auth()->user();
         $view = "components.form.{$page}";
 
         // if the view file doesn't exists
@@ -56,43 +55,29 @@ class UserController extends Controller
      * @param \App\Http\Requests\UserRequest $request
      * @return \Illuminate\Support\Facades\Redirect
      */
-    public function updateAccount(User $user)
+    public function updateAccount(UserRequest $request, User $user)
     {
         $this->authorize('update', $user);
 
-        $data = request()->all();
+        $user->update($request->validated());
 
-        Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:100', 'unique:users'],
-            'cover' => ['image', 'nullable'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        ]);
-
-        $isUpdated = $user->update($data);
-
-        if (! $isUpdated) {
-            return redirect()->back()->with('error', 'Something went wrong when updating your data, please try again!');
-        }
-
-        return redirect()->back()->with('success', 'Your data updated successfully!');
+        // couldn't redirect->back() because the username is changed
+        return redirect()->route('user.edit', [$user->username, 'account'])
+            ->with('success', 'Your data updated successfully!');
     }
 
     /**
      * Update the UserInfo of current user
      *
-     * @param \App\User $user
      * @param \App\Http\Requests\UserRequest $request
+     * @param \App\User $user
      * @return \Illuminate\Support\Facades\Redirect
      */
-    public function updateProfile(User $user, UserInfoRequest $request)
+    public function updateProfile(UserInfoRequest $request, User $user)
     {
         $this->authorize('update', $user);
 
-        $data = $request->except(['_token', '_method']);
-        $data['user_id'] = $user->id;
-
-        $user->userinfo->update($data);
+        $user->userinfo->update($request->validated());
 
         return redirect()->back()->with('success', 'Your data updated successfully!');
     }
@@ -104,7 +89,7 @@ class UserController extends Controller
      * @param \App\Http\Requests\UserSecurityRequest $request
      * @return \Illuminate\Support\Facades\Redirect;
      */
-    public function updateSecurity(User $user, UserSecurityRequest $request)
+    public function updateSecurity(UserSecurityRequest $request, User $user)
     {
         $this->authorize('update', $user);
 

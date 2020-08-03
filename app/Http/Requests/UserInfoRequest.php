@@ -32,7 +32,7 @@ class UserInfoRequest extends FormRequest
             'facebook' => 'active_url|nullable',
             'website' => 'active_url|nullable',
             'work_as' => 'string|nullable',
-            'work_at' => 'string|required:work_as|nullable',
+            'work_at' => 'string|required_with:work_as|nullable',
             'birth_date' => 'date|nullable',
         ];
     }

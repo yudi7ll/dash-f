@@ -41,7 +41,7 @@ class CommentController extends Controller
     {
         $this->authorize('update', $comment);
 
-        $isUpdated = $comment->update($request->all());
+        $isUpdated = $comment->update($request->validated());
 
         if (! $isUpdated) {
             return redirect()->back()->with('error', 'Update comment failed, Please try again later!');
