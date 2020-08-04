@@ -16,7 +16,7 @@ class Post extends Model
      *
      * @var string
      */
-    protected $path = 'public/posts/';
+    public static $path = 'public/posts/';
 
     /**
      * The attributes that are mass assignable.
@@ -86,7 +86,7 @@ class Post extends Model
     public function setBodyAttribute($value)
     {
         $filename = $this->attributes['slug'] . '.md';
-        $fullPath = $this->path . $filename;
+        $fullPath = self::$path . $filename;
 
         Storage::put($fullPath, $value);
 
@@ -101,7 +101,7 @@ class Post extends Model
      */
     public function getBodyAttribute($value)
     {
-        return Storage::get($this->path . $value);
+        return Storage::get(self::$path . $value);
     }
 
     /**

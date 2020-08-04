@@ -11,6 +11,10 @@ use View;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, 'user');
+    }
     /**
      * Display the user profile
      *
@@ -19,7 +23,8 @@ class UserController extends Controller
      */
     public function profile(User $user)
     {
-        $posts = $user->posts()->latest()->paginate(8);
+        $sort = request()->sort;
+        $posts = PostController::postsWithOrder($sort)->paginate(8);
 
         return view('user.show')
             ->nest('postcard', 'components.postcard', compact('posts'))
@@ -33,15 +38,14 @@ class UserController extends Controller
      * @param string $page
      * @return mixed
      */
-    public function edit(User $user, $page)
+    public function edit(User $user)
     {
-        $this->authorize('update', $user);
-
+        $page = request()->page;
         $view = "components.form.{$page}";
 
         // if the view file doesn't exists
         if (! View::exists($view)) {
-            return redirect("{$user->username}/edit/profile");
+            return redirect("{$user->username}/edit?page=profile");
         }
 
         return view('user.edit', $user)
@@ -57,12 +61,10 @@ class UserController extends Controller
      */
     public function updateAccount(UserRequest $request, User $user)
     {
-        $this->authorize('update', $user);
-
         $user->update($request->validated());
 
         // couldn't redirect->back() because the username is changed
-        return redirect()->route('user.edit', [$user->username, 'account'])
+        return redirect($user->username . '/edit?page=account')
             ->with('success', 'Your data updated successfully!');
     }
 
@@ -75,8 +77,6 @@ class UserController extends Controller
      */
     public function updateProfile(UserInfoRequest $request, User $user)
     {
-        $this->authorize('update', $user);
-
         $user->userinfo->update($request->validated());
 
         return redirect()->back()->with('success', 'Your data updated successfully!');
@@ -91,8 +91,6 @@ class UserController extends Controller
      */
     public function updateSecurity(UserSecurityRequest $request, User $user)
     {
-        $this->authorize('update', $user);
-
         $user->update([ 'password' => Hash::make($request->new_password) ]);
 
         return redirect()->back()->with('success', 'Your password updated successfully!');

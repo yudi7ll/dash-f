@@ -39,8 +39,6 @@ class CommentController extends Controller
      */
     public function update(CommentRequest $request, Comment $comment)
     {
-        $this->authorize('update', $comment);
-
         $isUpdated = $comment->update($request->validated());
 
         if (! $isUpdated) {

@@ -26,12 +26,18 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'username' => ['required', 'string', 'max:100',
-                Rule::unique('users')->ignore(auth()->user())
+            'username' => [
+                'required',
+                'string',
+                'max:100',
+                Rule::unique('users')->ignore(auth()->user()),
+                Rule::notIn(['posts', 'tags']),
             ],
             'cover' => 'image|nullable',
-            'email' => ['required','email:rfc',
-                Rule::unique('users')->ignore(auth()->user())
+            'email' => [
+                'required',
+                'email:rfc',
+                Rule::unique('users')->ignore(auth()->user()),
             ],
         ];
     }

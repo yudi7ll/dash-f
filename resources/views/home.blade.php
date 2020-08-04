@@ -6,14 +6,12 @@
     <div class="container py-4">
         <div class="row justify-content-between">
             <div class="col-lg-8">
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
+                @include('components.sort_posts')
+
                 <div id="postcard">
                     {!! $postcard !!}
                 </div>
+
                 <center class="my-4">
                     <div id="loading" style="display: none;">
                         <div class="spinner-grow spinner-grow-sm text-success" role="status">

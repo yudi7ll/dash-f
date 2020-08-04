@@ -27,8 +27,7 @@ Route::resource('/comments', 'CommentController');
 
 // user
 Route::get('/{user:username}', 'UserController@profile')->name('user');
-Route::redirect('/{user:username}/edit', '/{user:username}/edit/profile');
-Route::get('/{user:username}/edit/{page}', 'UserController@edit')->name('user.edit');
+Route::get('/{user:username}/edit', 'UserController@edit')->name('user.edit');
 
 // @UserUpdate
 // Account

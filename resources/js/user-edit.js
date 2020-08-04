@@ -1,11 +1,10 @@
-const param = document.location.pathname.split('/')[3];
+const param = new URLSearchParams(window.location.search).get('page');
 const navLink = document.getElementById('navigationLink');
 
-
 // mobile nav
-navLink.children['option-' + param].selected = true;
-navLink.addEventListener('change', e => {
-    document.location.href = e.target.value;
+navLink.querySelector(`option[value=${param}]`).selected = true;
+navLink.addEventListener('change', () => {
+    document.getElementById('pageForm').submit();
 });
 
 // desktop nav

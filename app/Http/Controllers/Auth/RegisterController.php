@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\User;
 use App\UserInfo;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -32,7 +33,8 @@ class RegisterController extends Controller
      */
     public function redirectPath()
     {
-        return auth()->user()->username . '/edit/profile';
+        Session::flash('success', 'Welcome, Please consider to fill your profile info (optional)');
+        return auth()->user()->username . '/edit?page=profile';
     }
 
     /**
@@ -55,7 +57,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:100', 'unique:users'],
+            'username' => ['required', 'string', 'max:100', 'unique:users', Rule::notIn(['posts', 'tags'])],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);

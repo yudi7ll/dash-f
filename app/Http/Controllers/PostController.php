@@ -15,17 +15,30 @@ class PostController extends Controller
     }
 
     /**
+     * Post resources that ordered by specified sort
+     *
+     * @param string $sort
+     * @return \App\Post
+     */
+    public static function postsWithOrder($sort)
+    {
+        return Post::with('user')
+            ->with('tagged')
+            ->withCount('comments')
+            ->orderByDesc($sort ?: 'created_at')
+            ->where('published', true);
+    }
+
+    /**
      * Display a initial view with listing of the posts, popular posts & tags.
      *
      * @return \Illuminate\Support\Facades\View
      */
     public function index()
     {
-        $posts = Post::with('user')
-                    ->with('tagged')
-                    ->latest()
-                    ->where('published', true)
-                    ->paginate(8);
+        $sort = request()->sort;
+        $posts = self::postsWithOrder($sort)->paginate(8);
+
         $populars = Post::all()->take(10);
         $tags = Tag::limit(8)->orderByDesc('count')->get();
 
@@ -67,7 +80,7 @@ class PostController extends Controller
 
         return redirect()
             ->route('posts.show', $data->slug)
-            ->with('success', 'Article saved successfully!');
+            ->with('success', 'Article posted successfully!');
     }
 
     /**
@@ -81,7 +94,7 @@ class PostController extends Controller
         if (!$post->published) {
 
             if (auth()->id() === $post->user_id) {
-                return view('post.show', compact('post'));
+                return view('posts.show', compact('post'));
             }
 
             return redirect()->back()->with('error', 'You don\'t have permissions to do this action');
@@ -140,7 +153,12 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         Storage::delete($post->path . $post->body);
-        $post->delete();
+        $isDeleted = $post->delete();
+
+        if (! $isDeleted) {
+            return redirect()->back()->with('error', 'Something went wrong, please try again later');
+        }
+
         return redirect('/')->with('success', 'Article deleted successfully!');
     }
 }

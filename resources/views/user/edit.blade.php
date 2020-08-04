@@ -8,23 +8,22 @@
         <div class="row">
             <section class="col-md-4 d-md-none mb-3 pb-0">
                 <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="navigationLink">Settings for</label>
-                    </div>
-                    <select class="custom-select shadow-none" id="navigationLink">
-                        <option id="option-profile" value="{{ route('user.edit', [auth()->user()->username, 'profile']) }}">Profile</option>
-                        <option id="option-account" value="{{ route('user.edit', [auth()->user()->username, 'account']) }}">Account</option>
-                        <option id="option-security" value="{{ route('user.edit', [auth()->user()->username, 'security']) }}">Security</option>
-                    </select>
+                    <form class="w-100" id="pageForm" action="{{ route('user.edit', auth()->user()->username) }}" method="get">
+                        <select class="custom-select shadow-none" id="navigationLink" name="page">
+                            <option value="profile">Profile</option>
+                            <option value="account">Account</option>
+                            <option value="security">Security</option>
+                        </select>
+                    </form>
                 </div>
             </section>
             <div class="col-md-4 d-none d-md-block">
                 <form id="navigation" class="list-group" action="{{ route('logout') }}" method="post">
                     @csrf
 
-                    <a id="profile" class="list-group-item list-group-item-action" href="{{ route('user.edit', [auth()->user()->username, 'profile']) }}">Profile</a>
-                    <a id="account" class="list-group-item list-group-item-action" href="{{ route('user.edit', [auth()->user()->username, 'account']) }}">Account</a>
-                    <a id="security" class="list-group-item list-group-item-action" href="{{ route('user.edit', [auth()->user()->username, 'security']) }}">Security</a>
+                    <a id="profile" class="list-group-item list-group-item-action" href="{{ route('user.edit', auth()->user()->username) . '?page=profile' }}">Profile</a>
+                    <a id="account" class="list-group-item list-group-item-action" href="{{ route('user.edit', auth()->user()->username ) . '?page=account' }}">Account</a>
+                    <a id="security" class="list-group-item list-group-item-action" href="{{ route('user.edit', auth()->user()->username) . '?page=security' }}">Security</a>
 
                     <button class="list-group-item list-group-item-action text-danger" type="submit">Logout</button>
                 </form>

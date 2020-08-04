@@ -4,32 +4,25 @@
     </div>
 
     <section class="list-group list-group-flush pt-2">
-        @isset ($populars)
-            @forelse ($populars as $popular)
-                <div class="px-3 py-2 list-group-item">
-                    <a class="text-dark d-inline-block text-break" href="{{ route('posts.show', $popular['slug']) }}" title="{{ $popular['title'] }}">
-                        {{ $popular['title'] }}
-                    </a>
-                    <div>
-                        <small class="text-muted">
-                            <a class="text-dark" href="{{ route('user', $popular['user']) }}">
-                                {{ $popular['user']['name'] }}
-                            </a>
-                            <span> . </span>
-                            <span>{{ $popular['updated_at']->diffForHumans() }}</span>
-                        </small>
-                    </div>
+        @forelse ($populars as $popular)
+            <div class="px-3 py-2 list-group-item">
+                <a class="text-dark d-inline-block text-break" href="{{ route('posts.show', $popular['slug']) }}" title="{{ $popular['title'] }}">
+                    {{ $popular['title'] }}
+                </a>
+                <div>
+                    <small class="text-muted">
+                        <a class="text-dark" href="{{ route('user', $popular['user']) }}">
+                            {{ $popular['user']['name'] }}
+                        </a>
+                        <span> . </span>
+                        <span>{{ $popular['updated_at']->diffForHumans() }}</span>
+                    </small>
                 </div>
-            @empty
-                <div class="mx-auto text-danger" role="status">
-                    Something went wrong! :(
-                </div>
-            @endforelse
-        @else
-            <div class="spinner-border mx-auto text-primary" role="status">
-              <span class="sr-only">Loading...</span>
             </div>
-        @endisset
-        <a class="mt-3 text-center" href="/topic/popular">See All</a>
+        @empty
+            <div class="mx-auto text-danger" role="status">
+                Something went wrong! :(
+            </div>
+        @endforelse
     </section>
 </div>
