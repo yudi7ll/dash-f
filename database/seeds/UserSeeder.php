@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -20,5 +21,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('password'),
             'email_verified_at' => Carbon::now()
         ]);
+
+        factory(User::class, 10)->create();
     }
 }

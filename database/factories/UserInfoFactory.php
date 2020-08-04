@@ -7,19 +7,19 @@ use App\UserInfo;
 use Faker\Generator as Faker;
 
 $factory->define(UserInfo::class, function (Faker $faker) {
-    if (!User::all()->count()) {
+    if (User::doesntExist()) {
         factory(User::class)->create();
     }
 
+    $ids = User::all()->modelKeys();
     $user = [
-        'email' => User::all()->first()->email,
+        'email' => User::find($faker->randomElement($ids))->email,
         'password' => 'password'
     ];
 
     // try login
-    if (!auth()->check()) {
-        auth()->attempt($user);
-    }
+    auth()->logout();
+    auth()->attempt($user);
 
     return [
         'user_id' => '',

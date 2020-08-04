@@ -7,19 +7,19 @@ use App\User;
 use Faker\Generator as Faker;
 
 $factory->define(Post::class, function (Faker $faker) {
-    if (!User::all()->count()) {
+    if (User::doesntExist()) {
         factory(User::class)->create();
     }
 
+    $ids = User::all()->modelKeys();
     $user = [
-        'email' => User::all()->first()->email,
+        'email' => User::find($faker->randomElement($ids))->email,
         'password' => 'password'
     ];
 
     // try login
-    if (!auth()->check()) {
-        auth()->attempt($user);
-    }
+    auth()->logout();
+    auth()->attempt($user);
 
     $url = 'https://picsum.photos/id/';
 
