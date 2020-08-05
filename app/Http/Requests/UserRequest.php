@@ -33,7 +33,7 @@ class UserRequest extends FormRequest
                 Rule::unique('users')->ignore(auth()->user()),
                 Rule::notIn(['posts', 'tags']),
             ],
-            'cover' => 'image|nullable',
+            'cover' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:1000000',
             'email' => [
                 'required',
                 'email:rfc',

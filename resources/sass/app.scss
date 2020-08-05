@@ -52,4 +52,9 @@ section {
     }
 }
 
-.img-circle { border-radius: 10rem; }
+.img-circle {
+    border-radius: 100%;
+    height: 32px;
+    object-fit: cover;
+    width: 32px;
+}

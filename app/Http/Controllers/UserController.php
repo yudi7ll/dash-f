@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\ImageController;
 use App\Http\Requests\UserInfoRequest;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserSecurityRequest;
-use App\Post;
 use App\User;
 use Hash;
 use View;
@@ -59,7 +58,15 @@ class UserController extends Controller
      */
     public function updateAccount(UserRequest $request, User $user)
     {
-        $user->update($request->validated());
+        $filename = (new ImageController)->store($request, $user->username);
+        $data = $request->validated();
+        $data['cover'] = $filename;
+
+        if (! $filename) {
+            $data['cover'] = $user->cover;
+        }
+
+        $user->update($data);
 
         // couldn't redirect->back() because the username is changed
         return redirect($user->username . '/edit?page=account')

@@ -1,7 +1,7 @@
 <section class="d-flex align-items-center justify-content-between mb-2 py-2 px-3">
     <h5 class="text-dark font-weight-bold m-0">Posts</h5>
     <div>
-        <form id="sortForm" action="" method="get">
+        <form id="sortForm" action="{{ url('/') }}" method="get">
             <select class="custom-select custom-select-sm shadow-none" name="sort" id="sort">
                 <option value="created_at">Latest</option>
                 <option value="trending">Trending</option>
