@@ -23,10 +23,11 @@
                     <h1 class="font-weight-bold"> {{ $post['title'] }} </h1>
                     <h4>{{ $post['description'] }}</h4>
                     <div class="mb-2">
-                        <a href="{{ route('user', $post->user->username) }}">
+                        <a class="text-decoration-none" href="{{ route('user', $post->user->username) }}">
                             <img class="mr-2 img-circle" src="{{ route('cover.thumb', $post->user->cover) }}" alt="{{ $post->user->name }}" />
                         </a>
                         <a class="text-dark font-weight-bold" href="{{ route('user', $post['user']['username']) }}">{{ $post['user']['name'] }}</a>
+                        <span> . </span>
                         <small>{{ $post['created_at']->diffForHumans() }}</small>
                         @can('update', $post)
                             <a class="ml-2" href="{{ route('posts.edit', $post['slug']) }}">{{ __('Edit') }}</a>

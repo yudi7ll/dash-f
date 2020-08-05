@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <script>
+        window.API_URL = "/api/posts/{{ $user->username }}?page=";
+    </script>
     <script defer src="{{ asset('js/infinite-scroll.js') }}"></script>
 
     <div class="container py-4">
@@ -14,9 +17,7 @@
         <div class="row">
             <div class="col-lg-8">
                 @include('components.sort_posts')
-                <div id="postcard">
-                    {!! $postcard !!}
-                </div>
+                <div id="postcard"></div>
                 <center class="my-4">
                     <div id="loading" style="display: none;">
                         <div class="spinner-grow spinner-grow-sm text-success" role="status">

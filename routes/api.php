@@ -12,11 +12,12 @@
 */
 
 Route::namespace('Api')->group(function () {
-    Route::get('posts', 'PostController@index');
+    Route::get('/posts', 'PostController@index');
+    Route::get('/posts/{user:username}', 'PostController@userPosts');
 
     // images
-    Route::get('cover/{cover}', 'ImageController@getCoverImage')->name('cover');
-    Route::get('cover/{cover}/thumb', 'ImageController@getCoverThumb')->name('cover.thumb');
-    Route::get('image/{width}/{height}', 'ImageController@index')->name('image');
+    Route::get('/cover/{cover}', 'ImageController@getCoverImage')->name('cover');
+    Route::get('/cover/{cover}/thumb', 'ImageController@getCoverThumb')->name('cover.thumb');
+    Route::get('/image/{width}/{height}', 'ImageController@index')->name('image');
 });
 

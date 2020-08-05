@@ -32,5 +32,4 @@ mix
     .sass('resources/sass/pages/userinfo.scss', 'public/css')
     // user page
     .sass('resources/sass/pages/user-edit.scss', 'public/css')
-    .js('resources/js/user-edit', 'public/js')
-    .browserSync('0.0.0.0');
+    .js('resources/js/user-edit', 'public/js');

@@ -7,4 +7,5 @@ window.CONFIG = {
     }
 }
 
-window.BASEURL = document.location.origin;
+window.BASE_URL = document.location.origin;
+window.API_URL = '/api/posts?page=';

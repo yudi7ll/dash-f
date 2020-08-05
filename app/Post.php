@@ -105,6 +105,22 @@ class Post extends Model
     }
 
     /**
+     * Post resources that ordered by specified sort
+     *
+     * @param string $sort
+     * @return \App\Post
+     */
+    public function getPostsFeedBy($sort)
+    {
+        return $this
+            ->with('user')
+            ->with('tagged')
+            ->withCount('comments')
+            ->orderByDesc($sort ?: 'created_at')
+            ->where('published', true);
+    }
+
+    /**
      * @RELATIONS
      */
     public function user()

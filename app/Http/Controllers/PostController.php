@@ -15,35 +15,16 @@ class PostController extends Controller
     }
 
     /**
-     * Post resources that ordered by specified sort
-     *
-     * @param string $sort
-     * @return \App\Post
-     */
-    public static function postsWithOrder($sort)
-    {
-        return Post::with('user')
-            ->with('tagged')
-            ->withCount('comments')
-            ->orderByDesc($sort ?: 'created_at')
-            ->where('published', true);
-    }
-
-    /**
      * Display a initial view with listing of the posts, popular posts & tags.
      *
      * @return \Illuminate\Support\Facades\View
      */
     public function index()
     {
-        $sort = request()->sort;
-        $posts = self::postsWithOrder($sort)->paginate(8);
-
         $populars = Post::all()->take(10);
         $tags = Tag::limit(8)->orderByDesc('count')->get();
 
         return view('home')
-            ->nest('postcard', 'components.postcard', compact('posts'))
             ->nest('popular_post', 'components.popular_post', compact('populars'))
             ->nest('tags', 'components.tagscard', compact('tags'));
     }

@@ -1,35 +1,37 @@
 'use strict';
 
-const SITEURL = BASEURL + "/api/posts?page=";
+const params = window.location.search.replace('?', '&');
+const SITE_URL = BASE_URL + API_URL;
 
-let page = 2;
+let page = 1;
 let isLoading = false;
 const loadingEl = document.getElementById('loading');
 const noDataEl = document.getElementById('no-data');
 
-// define show method
-document.__proto__.__proto__.__proto__.show = function() {
-    return this.style.display = 'block';
+// define displayBlock method
+document.__proto__.__proto__.__proto__.displayBlock = function() {
+    this.style.display = 'block';
 }
 
-// define hide method
-document.__proto__.__proto__.__proto__.hide = function() {
-    return this.style.display = 'none';
+// define displayHide method
+document.__proto__.__proto__.__proto__.displayHide = function() {
+    this.style.display = 'none';
 }
 
 async function load_more() {
-    noDataEl.hide();
-    loadingEl.show();
+    noDataEl.displayHide();
+    loadingEl.displayBlock();
 
     if (!isLoading) {
+        const URL = SITE_URL + page + params;
         isLoading = true;
 
         try {
-            let res = await fetch(SITEURL + page, CONFIG);
+            let res = await fetch(URL, CONFIG);
             res = await res.text();
 
             if (!res) {
-                return noDataEl.show();
+                return noDataEl.displayBlock();
             }
 
             // increment the page var
@@ -38,15 +40,16 @@ async function load_more() {
             // append to the page
             document.getElementById('postcard').innerHTML += res;
         } catch(e) {
-            noDataEl.show();
+            noDataEl.displayBlock();
         } finally {
-            loadingEl.hide();
+            loadingEl.displayHide();
             isLoading = false;
         }
     }
 }
 
 // handle the scroll event
+load_more();
 window.addEventListener('scroll', () => {
     if (document.body.scrollHeight - window.scrollY <= 700) {
         load_more();

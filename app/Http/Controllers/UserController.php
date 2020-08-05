@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Api\PostController;
 use App\Http\Requests\UserInfoRequest;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserSecurityRequest;
+use App\Post;
 use App\User;
 use Hash;
 use View;
@@ -23,11 +25,7 @@ class UserController extends Controller
      */
     public function profile(User $user)
     {
-        $sort = request()->sort;
-        $posts = PostController::postsWithOrder($sort)->paginate(8);
-
-        return view('user.show')
-            ->nest('postcard', 'components.postcard', compact('posts'))
+        return view('user.show', compact('user'))
             ->nest('bio', 'components.userbio', compact('user'));
     }
 

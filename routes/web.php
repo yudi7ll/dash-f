@@ -16,14 +16,14 @@ Auth::routes();
 Route::get('/', 'PostController@index')->name('home');
 
 // posts
-Route::resource('/posts', 'PostController');
+Route::resource('posts', 'PostController');
 
 // tags
 Route::get('/tags', 'TagController@index')->name('tags');
 Route::get('/tags/{tag}', 'TagController@posts')->name('tags.post');
 
 // comments
-Route::resource('/comments', 'CommentController');
+Route::resource('comments', 'CommentController');
 
 // user
 Route::get('/{user:username}', 'UserController@profile')->name('user');

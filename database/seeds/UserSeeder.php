@@ -22,6 +22,6 @@ class UserSeeder extends Seeder
             'email_verified_at' => Carbon::now()
         ]);
 
-        factory(User::class, 10)->create();
+        factory(User::class, 5)->create();
     }
 }

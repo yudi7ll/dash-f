@@ -8,9 +8,7 @@
             <div class="col-lg-8">
                 @include('components.sort_posts')
 
-                <div id="postcard">
-                    {!! $postcard !!}
-                </div>
+                <div id="postcard"></div>
 
                 <center class="my-4">
                     <div id="loading" style="display: none;">
