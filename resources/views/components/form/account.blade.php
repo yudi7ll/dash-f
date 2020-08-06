@@ -39,7 +39,7 @@
         </div>
         <div class="custom-file">
             <input class="custom-file-input @error('cover') is-invalid @enderror" id="inputCover" type="file" accept=".jpg,.jpeg,.png,.gif,.webp" name="cover">
-            <label class="custom-file-label" for="inputCover">Choose file</label>
+            <label class="custom-file-label overflow-hidden" for="inputCover">Choose file</label>
         </div>
         @error('cover')
             <span class="invalid-feedback d-block" role="alert">

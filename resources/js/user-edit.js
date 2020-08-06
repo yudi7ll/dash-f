@@ -13,3 +13,26 @@ navLink.addEventListener('change', () => {
 
 // desktop nav
 document.getElementById(param).classList.add('active');
+
+// TODO: prevent user from leaving when input is changed except submitting form
+
+// if the form input is changed then set isDirty to true
+// document
+//     .querySelectorAll('form input')
+//     .forEach(el => {
+//         el.addEventListener('change', () => window.onbeforeunload = function () {
+//             return "";
+//         });
+//     });
+//
+// document
+//     .querySelector('form button[type="submit"]')
+//     .addEventListener('click', () => {
+//
+//         window.onbeforeunload = null;
+//     });
+
+// prevent user from leaving the page
+// window.onbeforeunload = function() {
+//     return isDirty ? "" : null;
+// }
