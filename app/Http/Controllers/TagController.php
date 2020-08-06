@@ -11,7 +11,7 @@ class TagController extends Controller
     {
         $tags = Tag::all();
 
-        return view('tags', compact('tags'));
+        return view('tags.show', compact('tags'));
     }
 
     public function posts($tag)
