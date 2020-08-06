@@ -5,6 +5,7 @@
     "/css/user-edit.css": "/css/user-edit.css",
     "/js/infinite-scroll.js": "/js/infinite-scroll.js",
     "/js/post-form.js": "/js/post-form.js",
+    "/js/post-show.js": "/js/post-show.js",
     "/js/user-edit.js": "/js/user-edit.js",
     "/css/post-form.css": "/css/post-form.css"
 }

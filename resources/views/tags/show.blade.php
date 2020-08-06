@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="">
-        <h1>Top Tags</h1>
-    </div>
+    @foreach ($tags as $tag)
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="{{ route('tags.posts', $tag->slug) }}">{{ $tag->name }} ({{ $tag->count }})</a>
+            </li>
+        </ul>
+    @endforeach
 @endsection

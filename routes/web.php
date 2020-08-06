@@ -20,7 +20,7 @@ Route::resource('posts', 'PostController');
 
 // tags
 Route::get('/tags', 'TagController@index')->name('tags');
-Route::get('/tags/{tag}', 'TagController@posts')->name('tags.post');
+Route::get('/tags/{tag}', 'TagController@posts')->name('tags.posts');
 
 // comments
 Route::resource('comments', 'CommentController');

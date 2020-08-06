@@ -10,7 +10,7 @@
                 <p class="card-text">
                     <small>
                         @foreach ($post->tagged as $tag)
-                            <a href="{{ route('tags.post', $tag->tag_slug) }}">#{{ $tag->tag_name }}</a>
+                            <a href="{{ route('tags.posts', $tag->tag_slug) }}">#{{ $tag->tag_slug }}</a>
                         @endforeach
                     </small>
                 </p>
@@ -37,7 +37,7 @@
                         <p class="card-text">
                             <small>
                                 @foreach ($post->tagged as $tag)
-                                    <a href="{{ route('tags.post', $tag->tag_slug) }}">#{{ $tag->tag_name }}</a>
+                                    <a href="{{ route('tags.posts', $tag->tag_slug) }}">#{{ $tag->tag_slug }}</a>
                                 @endforeach
                             </small>
                         </p>

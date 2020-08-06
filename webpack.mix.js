@@ -25,6 +25,9 @@ mix
     ], 'public/css/post-form.css')
     .js('resources/js/post-form', 'public/js')
 
+    // post-show
+    .js('resources/js/post-show', 'public/js')
+
     /**
      * @Pages
      */

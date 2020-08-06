@@ -19,5 +19,8 @@ Route::namespace('Api')->group(function () {
     Route::get('/cover/{cover}', 'ImageController@getCoverImage')->name('cover');
     Route::get('/cover/{cover}/thumb', 'ImageController@getCoverThumb')->name('cover.thumb');
     Route::get('/image/{width}/{height}', 'ImageController@index')->name('image');
+
+    // likes
+    Route::patch('likes/{post:slug}', 'LikeControllers@deleteOrStore')->name('like.posts');
 });
 

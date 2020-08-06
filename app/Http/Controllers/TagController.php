@@ -9,20 +9,20 @@ class TagController extends Controller
 {
     public function index()
     {
-        $tags = Tag::all();
+        $tags = Tag::orderByDesc('count')->get();
 
         return view('tags.show', compact('tags'));
     }
 
-    public function posts($tag)
+    public function posts($tags)
     {
-        $posts = Post::withAnyTag($tag)
+        $posts = Post::withAllTags($tags)
             ->with('user')
             ->with('tagged')
             ->where('published', true)
             ->paginate(8);
 
-        return view('post.tags')
+        return view('tags.posts', compact('tags'))
             ->nest('postcard', 'components.postcard', compact('posts'));
     }
 }

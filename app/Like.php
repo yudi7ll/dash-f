@@ -4,17 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Like extends Model
 {
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'content',
-        'likes',
-    ];
+    protected $fillable = [ 'post_id', ];
 
     /**
      * Set the user_id attributes to auth $id
