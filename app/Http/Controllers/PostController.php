@@ -106,6 +106,7 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         $this->authorize('update', $post);
+
         // only update the slug if the title changed
         if ($request->title !== $post->title) {
             $post->slug = $request->slug;
@@ -133,6 +134,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
+
         Storage::delete($post->path . $post->body);
         $isDeleted = $post->delete();
 
