@@ -58,14 +58,15 @@ class UserController extends Controller
      */
     public function updateAccount(UserRequest $request, User $user)
     {
+        // update the images on storage
         $filename = (new ImageController)->store($request, $user->username);
         $data = $request->validated();
-        $data['cover'] = $filename;
 
-        if (! $filename) {
-            $data['cover'] = $user->cover;
+        if ($filename) {
+            $data['cover'] = $filename;
         }
 
+        // update data on database
         $user->update($data);
 
         // couldn't redirect->back() because the username is changed
