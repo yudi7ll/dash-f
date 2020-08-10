@@ -32,6 +32,7 @@ class PostController extends Controller
                     ->with('user')
                     ->with('tagged')
                     ->withCount('comments')
+                    ->withCount('likes')
                     ->orderByDesc($sort)
                     ->where('published', true)
                     ->paginate(8);

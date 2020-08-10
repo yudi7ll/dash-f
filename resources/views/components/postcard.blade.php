@@ -22,6 +22,11 @@
                     <span> . </span>
                     <small class="text-muted">{{ \Carbon\Carbon::parse($post['updated_at'])->diffForHumans() }}</small>
                 </p>
+                <p class="card-text d-flex align-items-center justify-content-around mt-4 pt-3 border-top">
+                    <span class="text-dark">{{ $post->likes_count }} likes</span>
+                    <span>|</span>
+                    <a class="text-dark" href="{{ route('posts.show', $post['slug']) . '#comments' }}">{{ $post->comments_count }} Comments</a>
+                </p>
             </div>
         @else
             <div class="row no-gutters flex-md-row-reverse">
@@ -48,6 +53,11 @@
                             <a class="text-dark" href="{{ route('user', $post['user']['username']) }}">{{ $post['user']['name'] }}</a>
                             <span> . </span>
                             <small class="text-muted">{{ \Carbon\Carbon::parse($post['updated_at'])->diffForHumans() }}</small>
+                        </p>
+                        <p class="card-text d-flex align-items-center justify-content-around pt-3 mt-4 border-top">
+                            <span class="text-dark">{{ $post->likes_count }} likes</span>
+                            <span class="text-muted">|</span>
+                            <a class="text-dark" href="{{ route('posts.show', $post['slug']) . '#comments' }}">{{ $post->comments_count }} Comments</a>
                         </p>
                     </div>
                 </div>

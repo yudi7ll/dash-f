@@ -28,7 +28,7 @@
 <!-- End Edit Comment Modal -->
 
 
-<h5>Comments</h5>
+<h5 id="comments">Comments</h5>
 <form method="post" action="{{ route('comments.store') }}">
     @csrf
     <div class="form-group">
