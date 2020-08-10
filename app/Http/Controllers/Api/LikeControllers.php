@@ -14,20 +14,32 @@ class LikeControllers extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return bool
      */
-    public function deleteOrStore(Post $post)
+    public function deleteOrStore(Request $request, Post $post)
     {
-        $isLiked = $post->likes()->where('user_id', auth()->id())->exists();
+        $data = $request->validate([
+            'user_id' => 'integer|required',
+        ]);
+        $userId = $data['user_id'];
+        $isLiked = $post->likes()->where('user_id', $userId)->exists();
 
-        // @STORE if not liked yet
-        if (! $isLiked) {
-            return $post->likes()->insert([
-                'user_id'=> auth()->id(),
+        if ($isLiked) {
+            $post
+                ->likes()
+                ->where('user_id', $userId)
+                ->delete();
+        } else {
+            $post->likes()->insert([
+                'user_id'=> $userId,
                 'post_id' => $post->id
             ]);
         }
 
-        // @DELETE if already liked
-        return $post->likes()->whereFirst('user_id', auth()->id())->delete();
+        $resp = [
+            'likes_count' => $post->likes->count(),
+            'is_liked' => $post->likes()->where('user_id', $userId)->exists(),
+        ];
+
+        return response()->json($resp, 200);
     }
 
     /**
