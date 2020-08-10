@@ -32,7 +32,7 @@ class UserTest extends TestCase
         $response
             ->assertSuccessful()
             ->assertSeeText($user->name)
-            ->assertSeeText('Edit Profile');
+            ->assertSeeText('Settings');
     }
 
     public function test_user_should_be_able_to_edit_their_profile()
@@ -44,7 +44,9 @@ class UserTest extends TestCase
             ->actingAs($user)
             ->get($user->username . '/edit');
 
-        $response->assertSuccessful();
+        $response
+            ->assertRedirect()
+            ->assertDontSeeText('Login');
     }
 
     public function test_user_should_not_be_able_to_edit_other_user_profile()

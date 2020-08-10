@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Comment;
 use App\Post;
 use Tests\TestCase;
 
@@ -10,13 +9,24 @@ class CommentTest extends TestCase
 {
     public function test_guest_should_be_able_to_see_any_comments()
     {
-        $post = factory(Post::class)->create();
-        $comment = factory(Comment::class)->create(['post_id' => $post->id]);
+        $post = Post::first();
 
-        $response = $this->get("/post/{$post->slug}");
+        if (! $post) {
+            $post = factory(Post::class)->create();
+        }
+
+        if ($post->comments()->doesntExist()) {
+            $post->comments()->insert([
+                'user_id' => 1,
+                'post_id' => $post->id
+            ]);
+        }
+
+        $response = $this->get("/posts/{$post->slug}");
 
         $response
             ->assertSuccessful()
-            ->assertSeeText($comment->content);
+            ->assertSeeText($post->likes->count())
+            ->assertSeeText($post->comments->first()->content);
     }
 }

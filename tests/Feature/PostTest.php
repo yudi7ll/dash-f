@@ -12,7 +12,7 @@ class PostTest extends TestCase
     public function test_user_should_be_able_to_visit_create_post_form()
     {
         $user = factory(User::class)->create();
-        $response = $this->actingAs($user)->get('post/create');
+        $response = $this->actingAs($user)->get('posts/create');
 
         $response
             ->assertSuccessful()
@@ -37,7 +37,7 @@ class PostTest extends TestCase
     {
         $post = factory(Post::class)->create();
 
-        $response = $this->get("/post/{$post->slug}");
+        $response = $this->get("/posts/{$post->slug}");
 
         $response
             ->assertSuccessful()
@@ -51,7 +51,7 @@ class PostTest extends TestCase
         $post = factory(Post::class)->create(['published' => false]);
         Auth::logout();
 
-        $response = $this->get("/post/{$post->slug}");
+        $response = $this->get("/posts/{$post->slug}");
 
         $response
             ->assertRedirect('/');
