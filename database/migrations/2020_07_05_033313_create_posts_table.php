@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('title');
-            $table->string('slug')->index()->unique();
+            $table->string('slug')->unique();
             $table->boolean('published')->default(false);
             $table->text('description');
             $table->string('cover');

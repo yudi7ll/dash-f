@@ -9,6 +9,13 @@
 
     <style type="text/css" media="screen">
         .hljs { padding: 1rem; }
+        img {
+            max-width: 100%;
+            width: 100%;
+        }
+        p {
+            margin: 1rem 0;
+        }
     </style>
 
     <div class="row">
@@ -43,7 +50,7 @@
                             <a href="{{ route('tags.posts', $tag->tag_slug) }}">#{{ $tag->tag_slug }}</a>
                         @endforeach
                     </div>
-                    {!! (new Markdown)->convertToHtml($post['body']) !!}
+                    {!! Illuminate\Mail\Markdown::parse($post['body']) !!}
 
                     <hr>
                     <div id="likes">

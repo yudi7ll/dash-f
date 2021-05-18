@@ -15,7 +15,7 @@ class CreateUserInfosTable extends Migration
     {
         Schema::create('user_infos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->unique()->index();
+            $table->unsignedBigInteger('user_id')->unique();
             $table->string('bio')->nullable();
             $table->string('twitter')->nullable();
             $table->string('github')->nullable();
@@ -28,9 +28,9 @@ class CreateUserInfosTable extends Migration
             $table->date('birth_date')->nullable();
 
             $table->foreign('user_id')
-                  ->references('id')
-                  ->on('users')
-                  ->cascadeOnDelete();
+                ->references('id')
+                ->on('users')
+                ->cascadeOnDelete();
         });
     }
 

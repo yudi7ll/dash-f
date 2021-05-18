@@ -18,6 +18,14 @@ class UserPolicy
      */
     public function update(User $user, $profile)
     {
-        return $user->id === $profile->id;
+        if ($user->id === $profile->id) {
+            return true;
+        }
+
+        if (auth()->guest()) {
+            return redirect('/login');
+        }
+
+        return false;
     }
 }
