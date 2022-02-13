@@ -11,7 +11,7 @@ RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar /usr/local/bin/composer
 
 # configure file owner permissions
-RUN adduser -DG www-data -mu 1000 yudi
+RUN adduser -DG www-data -u 1000 yudi
 RUN chown -R yudi:www-data /var/www/html
 
 # clean up
