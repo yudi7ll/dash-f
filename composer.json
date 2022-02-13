@@ -67,8 +67,7 @@
             "@php artisan key:generate --ansi"
         ],
         "post-update-cmd": [
-            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "@php artisan ide-helper:generate"
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate"
         ],
         "public-storage-clear": "rm -rf storage/app/public/posts/*",
         "fresh": "composer dumpautoload && php artisan config:clear && php artisan optimize:clear && composer public-storage-clear && php artisan migrate:fresh --seed",
